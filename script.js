@@ -47,29 +47,45 @@
   const canvas = document.querySelector('#dust');
   const ctx = canvas.getContext('2d');
   let particles = [], width = 0, height = 0;
+  let particleEnergy = .08, scrollImpulse = 0, lastParticleScroll = scrollY;
   const resetCanvas = () => {
     const ratio = Math.min(devicePixelRatio || 1, 2);
     width = innerWidth; height = innerHeight;
     canvas.width = width * ratio; canvas.height = height * ratio;
     canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    particles = Array.from({length: Math.min(90, Math.round(width / 16))}, () => ({
-      x: Math.random() * width, y: Math.random() * height, r: Math.random() * 1.6 + .4,
+    particles = Array.from({length: Math.min(105, Math.round(width / 13))}, () => ({
+      x: Math.random() < .7 ? width * (.18 + Math.random() * .64) : Math.random() * width,
+      y: Math.random() * height, r: Math.random() * 2 + .45,
       speed: Math.random() * .32 + .07, alpha: Math.random() * .5 + .18,
-      color: Math.random() > .75 ? '124,255,196' : '53,230,160'
+      depth: Math.random() * .8 + .2, phase: Math.random() * Math.PI * 2,
+      color: Math.random() > .72 ? '124,255,196' : '53,230,160'
     }));
   };
   const animateDust = () => {
     ctx.clearRect(0, 0, width, height);
     particles.forEach(p => {
-      p.y -= p.speed; if (p.y < -6) { p.y = height + 6; p.x = Math.random() * width; }
-      ctx.beginPath(); ctx.fillStyle = `rgba(${p.color},${p.alpha})`;
+      p.y -= p.speed + scrollImpulse * p.depth;
+      p.x += Math.sin(performance.now() * .00055 + p.phase) * .08 * p.depth;
+      if (p.y < -8) { p.y = height + 8; p.x = width * (.16 + Math.random() * .68); }
+      if (p.y > height + 8) { p.y = -8; p.x = width * (.16 + Math.random() * .68); }
+      const center = Math.max(.25, 1 - Math.abs(p.x - width / 2) / (width * .7));
+      const alpha = Math.min(.9, p.alpha * center * (.32 + particleEnergy * 1.55));
+      ctx.beginPath(); ctx.fillStyle = `rgba(${p.color},${alpha})`;
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
     });
+    particleEnergy += (.08 - particleEnergy) * .045;
+    scrollImpulse *= .86;
     requestAnimationFrame(animateDust);
   };
   resetCanvas(); if (!reduce) animateDust();
   addEventListener('resize', resetCanvas, {passive: true});
+  addEventListener('scroll', () => {
+    const delta = scrollY - lastParticleScroll;
+    lastParticleScroll = scrollY;
+    particleEnergy = Math.min(1, particleEnergy + Math.abs(delta) / 85);
+    scrollImpulse = Math.max(-3.2, Math.min(3.2, delta * .035));
+  }, {passive: true});
 
   const title = document.querySelector('#heroTitle');
   const sectionTitles = [...document.querySelectorAll('main section h2')];
