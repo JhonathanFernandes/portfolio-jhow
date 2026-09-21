@@ -47,3 +47,22 @@ html{scroll-padding-top:66px}
   body.scroll-cinematic main>.sec:not(#hero)>.sec-in{width:100%}
   body.scroll-cinematic #sobre,body.scroll-cinematic #arquitetura,body.scroll-cinematic #trajetoria{background:var(--bg)}
 }
+
+/* Degradê mais claro nas seções verde-escuras. */
+[data-theme=dark] #sobre,
+[data-theme=dark] #arquitetura,
+[data-theme=dark] #trajetoria,
+[data-theme=dark] body.scroll-cinematic #sobre,
+[data-theme=dark] body.scroll-cinematic #arquitetura,
+[data-theme=dark] body.scroll-cinematic #trajetoria{
+  background:linear-gradient(90deg,#0d120c 0%,#102017 13%,#173522 34%,#1a4029 50%,#173522 66%,#102017 87%,#0d120c 100%);
+}
+
+[data-theme=dark] .hero-frame,
+[data-theme=dark] body.scroll-cinematic #hero{
+  background:linear-gradient(90deg,#101110 0%,#132018 12%,#193522 29%,#1d482d 48%,#19402b 64%,#123025 79%,#101813 92%,#101110 100%);
+}
+
+@media(min-width:981px){
+  [data-theme=dark] body.scroll-cinematic #hero .hero-frame{background:transparent}
+}
