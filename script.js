@@ -79,7 +79,9 @@
   if (!reduce) {
     setInterval(() => glitchTitles.forEach(blinkTitle), 9000);
     const titleObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) blinkTitle(entry.target);
+      if (!entry.isIntersecting) return;
+      blinkTitle(entry.target);
+      titleObserver.unobserve(entry.target);
     }), {threshold: .55});
     glitchTitles.forEach(glitchTitle => titleObserver.observe(glitchTitle));
   }
