@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.body.classList.add('intro-pending');
 
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (location.hash) history.replaceState(null, '', `${location.pathname}${location.search}`);
@@ -21,6 +22,10 @@
   const finishBoot = () => {
     document.body.style.overflow = '';
     boot.classList.add('done');
+    setTimeout(() => {
+      document.body.classList.remove('intro-pending');
+      document.body.classList.add('hero-ready');
+    }, reduce ? 0 : 320);
     setTimeout(() => { boot.style.display = 'none'; }, 700);
   };
   if (reduce) {

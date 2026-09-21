@@ -66,3 +66,13 @@ html{scroll-padding-top:66px}
 @media(min-width:981px){
   [data-theme=dark] body.scroll-cinematic #hero .hero-frame{background:transparent}
 }
+
+/* Entrada sequencial do texto principal, da esquerda para a direita. */
+.hero-line{display:block}
+.intro-pending .hero-reveal{opacity:0;clip-path:inset(0 100% 0 0);transform:translateX(-14px)}
+.hero-ready .hero-reveal{animation:hero-line-in .62s cubic-bezier(.22,.75,.24,1) both;animation-delay:calc(var(--intro-order) * 150ms)}
+@keyframes hero-line-in{
+  from{opacity:0;clip-path:inset(0 100% 0 0);transform:translateX(-14px)}
+  to{opacity:1;clip-path:inset(0 0 0 0);transform:translateX(0)}
+}
+@media(prefers-reduced-motion:reduce){.intro-pending .hero-reveal,.hero-ready .hero-reveal{opacity:1;clip-path:none;transform:none;animation:none}}
