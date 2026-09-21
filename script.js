@@ -135,9 +135,9 @@
   const updateCinematicReveal = () => {
     if (!aboutSection || reduce) return;
     const mobile = innerWidth <= 980;
-    const initialScale = mobile ? .92 : .82;
-    const lift = mobile ? 26 : 48;
-    const radius = mobile ? 24 : 42;
+    const initialScale = mobile ? .86 : .82;
+    const lift = mobile ? 48 : 48;
+    const radius = mobile ? 32 : 42;
     const start = innerHeight;
     const end = 66;
     cinematicSections.forEach(section => {
