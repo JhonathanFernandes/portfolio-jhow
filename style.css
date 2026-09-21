@@ -43,7 +43,15 @@ html{scroll-padding-top:66px}
 /* Versão leve da transição cinematográfica para celular e tablet. */
 @media(max-width:980px){
   body.scroll-cinematic main>.wedge{height:24px;background:var(--bg);clip-path:none}
-  body.scroll-cinematic main>.sec:not(#hero){--reveal-scale:.86;--reveal-opacity:.04;--reveal-lift:48px;--reveal-radius:32px;z-index:3;min-height:calc(100svh - 66px);opacity:var(--reveal-opacity);transform:translateY(var(--reveal-lift)) scale(var(--reveal-scale));transform-origin:center top;border-radius:var(--reveal-radius);box-shadow:0 -22px 52px rgba(0,0,0,.48);will-change:transform,opacity,border-radius}
+  body.scroll-cinematic main>.sec:not(#hero){--reveal-scale:.86;--reveal-opacity:.04;--reveal-lift:48px;--reveal-radius:32px;z-index:3;min-height:calc(100svh - 66px);height:auto;display:flex;align-items:center;opacity:var(--reveal-opacity);transform:translateY(var(--reveal-lift)) scale(var(--reveal-scale));transform-origin:center center;border-radius:var(--reveal-radius);box-shadow:0 -22px 52px rgba(0,0,0,.48);will-change:transform,opacity,border-radius}
   body.scroll-cinematic main>.sec:not(#hero)>.sec-in{width:100%}
   body.scroll-cinematic #sobre,body.scroll-cinematic #arquitetura,body.scroll-cinematic #trajetoria{background:var(--bg)}
+}
+
+@media(max-width:680px){
+  #hero{min-height:calc(100svh - 66px);height:auto}
+  .hero-frame{min-height:calc(100svh - 66px);height:auto;padding:clamp(28px,5svh,48px) 22px;gap:clamp(12px,2.5svh,28px)}
+  .hero-image-area{height:clamp(250px,40svh,360px);flex-basis:clamp(250px,40svh,360px)}
+  .hero-logo{height:clamp(250px,40svh,360px)}
+  body.scroll-cinematic main>.sec:not(#hero){padding-top:clamp(54px,8svh,82px);padding-bottom:clamp(54px,8svh,82px)}
 }
