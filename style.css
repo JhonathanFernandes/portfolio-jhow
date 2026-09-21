@@ -39,3 +39,10 @@ html{scroll-padding-top:66px}
   body.scroll-cinematic main>.sec:not(#hero)>.sec-in{width:100%}
   body.scroll-cinematic #sobre,body.scroll-cinematic #arquitetura,body.scroll-cinematic #trajetoria{background:var(--bg)}
 }
+
+/* Versão leve da transição cinematográfica para celular e tablet. */
+@media(max-width:980px){
+  body.scroll-cinematic main>.sec:not(#hero){--reveal-scale:.92;--reveal-opacity:.08;--reveal-lift:26px;--reveal-radius:24px;z-index:3;opacity:var(--reveal-opacity);transform:translateY(var(--reveal-lift)) scale(var(--reveal-scale));transform-origin:center top;border-radius:var(--reveal-radius);box-shadow:0 -16px 38px rgba(0,0,0,.3);will-change:transform,opacity,border-radius}
+  body.scroll-cinematic main>.sec:not(#hero)>.sec-in{width:100%}
+  body.scroll-cinematic #sobre,body.scroll-cinematic #arquitetura,body.scroll-cinematic #trajetoria{background:var(--bg)}
+}

@@ -131,18 +131,22 @@
   const aboutSection = document.querySelector('#sobre');
   const heroSection = document.querySelector('#hero');
   const cinematicSections = [...document.querySelectorAll('main > section.sec:not(#hero)')];
-  document.body.classList.add('scroll-cinematic');
+  if (!reduce) document.body.classList.add('scroll-cinematic');
   const updateCinematicReveal = () => {
-    if (!aboutSection || innerWidth <= 980) return;
+    if (!aboutSection || reduce) return;
+    const mobile = innerWidth <= 980;
+    const initialScale = mobile ? .92 : .82;
+    const lift = mobile ? 26 : 48;
+    const radius = mobile ? 24 : 42;
     const start = innerHeight;
     const end = 66;
     cinematicSections.forEach(section => {
       const rect = section.getBoundingClientRect();
       const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
-      section.style.setProperty('--reveal-scale', (.82 + progress * .18).toFixed(4));
+      section.style.setProperty('--reveal-scale', (initialScale + progress * (1 - initialScale)).toFixed(4));
       section.style.setProperty('--reveal-opacity', Math.max(.08, progress).toFixed(4));
-      section.style.setProperty('--reveal-lift', `${((1 - progress) * 48).toFixed(1)}px`);
-      section.style.setProperty('--reveal-radius', `${((1 - progress) * 42).toFixed(1)}px`);
+      section.style.setProperty('--reveal-lift', `${((1 - progress) * lift).toFixed(1)}px`);
+      section.style.setProperty('--reveal-radius', `${((1 - progress) * radius).toFixed(1)}px`);
     });
     const aboutRect = aboutSection.getBoundingClientRect();
     const aboutProgress = Math.max(0, Math.min(1, (start - aboutRect.top) / (start - end)));
