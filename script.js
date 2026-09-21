@@ -2,6 +2,15 @@
   'use strict';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', `${location.pathname}${location.search}`);
+  const resetToHero = () => scrollTo(0, 0);
+  resetToHero();
+  addEventListener('pageshow', () => {
+    resetToHero();
+    requestAnimationFrame(resetToHero);
+  });
+
   const boot = document.querySelector('#boot');
   const bootBox = document.querySelector('#bootLines');
   const bootLines = [
@@ -12,13 +21,12 @@
   const finishBoot = () => {
     document.body.style.overflow = '';
     boot.classList.add('done');
-    try { sessionStorage.setItem('booted-v2', '1'); } catch (_) {}
     setTimeout(() => { boot.style.display = 'none'; }, 700);
   };
-  let booted = reduce;
-  try { booted ||= sessionStorage.getItem('booted-v2') === '1'; } catch (_) {}
-  if (booted) boot.style.display = 'none';
-  else {
+  if (reduce) {
+    bootBox.innerHTML = bootLines.map(([text, cls]) => `<span class="${cls}">${text}</span>`).join('\n');
+    setTimeout(finishBoot, 650);
+  } else {
     document.body.style.overflow = 'hidden';
     let line = 0, char = 0, html = '';
     const typeBoot = () => {
