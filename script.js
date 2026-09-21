@@ -19,6 +19,14 @@
     ['conectando ao banco.......... ok', 'ok'], ['aplicando migrations......... ok', 'ok'],
     ['servidor pronto na porta 3000', 'ok'], ['bem-vindo.', 'dim']
   ];
+  const renderBoot = (activeLine, activeChars, showCaret = true) => {
+    const lastLine = Math.min(activeLine, bootLines.length - 1);
+    bootBox.innerHTML = bootLines.slice(0, lastLine + 1).map(([text, cls], index) => {
+      const visibleText = index < activeLine ? text : text.slice(0, activeChars);
+      const caret = showCaret && index === lastLine ? '<span id="bootCaret"></span>' : '';
+      return `<span class="boot-line ${cls}" style="--line-chars:${text.length}">${visibleText}${caret}</span>`;
+    }).join('');
+  };
   const finishBoot = () => {
     document.body.style.overflow = '';
     boot.classList.add('done');
@@ -29,21 +37,24 @@
     setTimeout(() => { boot.style.display = 'none'; }, 700);
   };
   if (reduce) {
-    bootBox.innerHTML = bootLines.map(([text, cls]) => `<span class="${cls}">${text}</span>`).join('\n');
+    bootBox.innerHTML = bootLines.map(([text, cls]) => `<span class="boot-line ${cls}" style="--line-chars:${text.length}">${text}</span>`).join('');
     setTimeout(finishBoot, 650);
   } else {
     document.body.style.overflow = 'hidden';
-    let line = 0, char = 0, html = '';
+    let line = 0, char = 0;
+    renderBoot(line, char);
     const typeBoot = () => {
       if (line >= bootLines.length) return setTimeout(finishBoot, 650);
-      const [text, cls] = bootLines[line];
-      if (!char) html += `<span class="${cls}">`;
+      const [text] = bootLines[line];
       if (char < text.length) {
-        html += text[char++]; bootBox.innerHTML = `${html}</span><span id="bootCaret"></span>`;
+        char++;
+        renderBoot(line, char);
         setTimeout(typeBoot, 16 + Math.random() * 22);
       } else {
-        html += '</span>\n'; line++; char = 0;
-        bootBox.innerHTML = `${html}<span id="bootCaret"></span>`; setTimeout(typeBoot, 190);
+        line++; char = 0;
+        if (line < bootLines.length) renderBoot(line, char);
+        else renderBoot(bootLines.length - 1, bootLines.at(-1)[0].length);
+        setTimeout(typeBoot, 190);
       }
     };
     typeBoot();
