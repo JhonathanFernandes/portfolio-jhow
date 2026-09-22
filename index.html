@@ -1,20 +1,406 @@
 <!doctype html>
 <html lang="pt-BR" data-theme="dark">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Portfólio de Jhonathan Fernandes — backend, APIs e sistemas.">
-  <title>JHOW.DEV — Backend & Sistemas</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css?v=23">
-</head><body>
-<div id="boot" role="status" aria-live="polite"><div id="bootLines"></div></div><canvas id="dust" aria-hidden="true"></canvas>
-<header class="nav"><div class="nav-in"><a href="#hero" class="brand">JHOW<span>.DEV</span></a><nav aria-label="Navegação principal"><ul class="nav-links" id="navLinks"><li><a href="#sobre">Sobre</a></li><li><a href="#projetos">Projetos</a></li><li><a href="#arquitetura">Arquitetura</a></li><li><a href="#stack">Stack</a></li><li><a href="#trajetoria">Trajetória</a></li><li><a href="#contato">Contato</a></li></ul></nav><div class="nav-tools"><button class="icon-btn burger" id="burger" aria-label="Abrir menu" aria-expanded="false">≡</button><button class="icon-btn" id="themeBtn" aria-label="Alternar tema">◐</button><span class="status"><span class="dot"></span>disponível</span></div></div></header>
-<main>
-<section class="sec" id="hero"><div class="hero-frame hero-grid"><div class="hero-copy"><p class="hero-tag hero-reveal" style="--intro-order:0">FULL STACK · CIBERSEGURANÇA · APIS REST</p><h1 id="heroTitle" data-text="DEVELOPER FULL STACK &amp; CYBER"><span class="hero-line hero-reveal" style="--intro-order:1">DEVELOPER FULL</span><span class="hero-line hero-reveal" style="--intro-order:2">STACK</span><span class="hero-line hero-reveal hl" style="--intro-order:3">&amp; CYBER</span></h1><p class="hero-sub hero-reveal" style="--intro-order:4">Construo back-ends multi-tenant em Node.js e TypeScript — domínio separado da infra, migrations versionadas e deploy confiável.</p><div class="btn-row hero-reveal" style="--intro-order:5"><a class="btn btn-solid" href="#projetos">Ver projetos</a><a class="btn btn-ghost" href="#contato">Falar comigo</a></div></div><div class="hero-image-area"><video class="hero-logo" autoplay muted loop playsinline poster="assets/Jhow-hero.png" aria-label="Avatar animado de Jhonathan"><source src="assets/jhow-teste-transparent.webm?v=8" type="video/webm"><img src="assets/Jhow-hero.png" alt="Avatar de Jhonathan"></video></div></div></section>
-<section class="sec" id="sobre"><div class="sec-in"><div class="about-grid"><div class="stats reveal"><div class="stat"><div class="k">tenants_isolados</div><div class="v" data-count="1">0</div><div class="l">multi-tenant</div></div><div class="stat"><div class="k">projetos_em_produção</div><div class="v" data-count="2">0</div><div class="l">rodando de verdade</div></div><div class="stat"><div class="k">camadas_do_domínio</div><div class="v" data-count="4">0</div><div class="l">clean architecture</div></div><div class="stat"><div class="k">migrations_rodadas</div><div class="v" data-count="60" data-suffix="+">0</div><div class="l">prisma migrate</div></div></div><div class="about-copy"><p class="kicker">/* quem escreve o código */</p><h2>Back-end é onde<br>a regra mora.</h2><div class="reveal"><p>Sou <strong>Jhonathan</strong>, desenvolvedor em Curitiba, cursando <em>Análise e Desenvolvimento de Sistemas</em> na UNINTER.</p><p>Meu trabalho principal hoje é um <strong>SaaS médico multi-tenant</strong>: gestão de clínicas com isolamento por tenant, controle de acesso e microsserviço de atendimento.</p><p>Sigo <em>Clean Architecture</em>: domínio no centro, framework na borda e teste no meio.</p><div class="chips"><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">Prisma</span><span class="chip">Express</span><span class="chip">React</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span></div></div></div></div></div></section>
-<div class="wedge wedge-in"></div><section class="sec band" id="projetos"><div class="sec-in"><div class="head-row"><div><p class="kicker">/* o que já está de pé */</p><h2>Cada projeto resolveu<br>um problema real.</h2></div><span class="kicker" id="projCount">4 no total</span></div><p class="lead">Sistemas com usuários, banco relacional e deploy.</p><div class="filters"><button class="fchip on" data-f="todos">Todos</button><button class="fchip" data-f="saas">SaaS</button><button class="fchip" data-f="api">API</button><button class="fchip" data-f="web">Web</button></div><div class="proj-grid"><article class="proj tilt" data-tag="saas"><div class="p-top"><h3>Clinic Platform</h3><span class="p-tag">SaaS</span></div><p class="p-stack">Node.js · TypeScript · Prisma · PostgreSQL</p><p class="p-desc">Plataforma multi-tenant de gestão de clínicas com agenda, pacientes, RBAC e isolamento.</p><a class="p-link" href="#contato">Ver detalhes</a></article><article class="proj tilt" data-tag="api"><div class="p-top"><h3>motor-atendimento</h3><span class="p-tag">API</span></div><p class="p-stack">Node.js · Express · Prisma</p><p class="p-desc">Microsserviço de fluxo de atendimento integrado à plataforma principal.</p><a class="p-link" href="#contato">Ver detalhes</a></article><article class="proj tilt" data-tag="web"><div class="p-top"><h3>Bolão da Resenha</h3><span class="p-tag">Web</span></div><p class="p-stack">React · Vite · Node.js · MySQL</p><p class="p-desc">Palpites, apuração automática e ranking em tempo real.</p><a class="p-link" href="#contato">Ver detalhes</a></article><article class="proj tilt" data-tag="api"><div class="p-top"><h3>Seu próximo projeto</h3><span class="p-tag">API</span></div><p class="p-desc">Espaço reservado para o próximo sistema colocado no ar.</p><a class="p-link" href="#contato">Conversar</a></article></div></div></section>
-<div class="wedge wedge-out"></div><section class="sec" id="arquitetura"><div class="sec-in"><p class="kicker">/* infra e deploy */</p><h2>Colocar no ar é<br>parte do trabalho.</h2><p class="lead">Migrations versionadas, variáveis fora do código, log acessível e rollback possível.</p><div class="term-grid"><div class="term reveal"><div class="term-bar"><i></i><i></i><i></i></div><div class="term-body" id="termBody"></div></div><div class="reveal"><div class="side-block"><p class="side-t">o que cuido</p><div class="chips"><span class="chip">Docker</span><span class="chip">Railway</span><span class="chip">Prisma Migrate</span><span class="chip">JWT / RBAC</span><span class="chip">CI básico</span></div></div><div class="side-block"><p class="side-t">princípio que sigo</p><p>Banco é fonte da verdade, schema é código e todo ambiente sobe do zero com um comando.</p></div></div></div></div></section>
-<div class="wedge wedge-in"></div><section class="sec band" id="stack"><div class="sec-in"><p class="kicker">/* ferramentas do dia a dia */</p><h2>A stack por trás<br>dos projetos.</h2><div class="stack-grid"><div class="skills"></div><div class="icons"><div class="ico"><div>TS</div>TypeScript</div><div class="ico"><div>JS</div>JavaScript</div><div class="ico"><div>N</div>Node.js</div><div class="ico"><div>Ex</div>Express</div><div class="ico"><div>Pr</div>Prisma</div><div class="ico"><div>Pg</div>PostgreSQL</div><div class="ico"><div>R</div>React</div><div class="ico"><div>Dk</div>Docker</div></div></div></div></section>
-<div class="wedge wedge-out"></div><section class="sec" id="trajetoria"><div class="sec-in"><p class="kicker">/* como cheguei aqui */</p><h2>Trajetória.</h2><div class="tl"><div class="tl-item reveal"><p class="tl-when">2025</p><p class="tl-what">Primeiros sistemas em produção</p><p>Autenticação, banco relacional e deploy para usuários reais.</p></div><div class="tl-item reveal"><p class="tl-when">2025 — 2026</p><p class="tl-what">Arquitetura e disciplina</p><p>Casos de uso isolados, repositórios como contrato e Prisma como detalhe de infra.</p></div><div class="tl-item reveal"><p class="tl-when">2026 — agora</p><p class="tl-what">SaaS médico multi-tenant</p><p>MVP com modelagem de domínio, isolamento por tenant, RBAC e microsserviço.</p></div></div></div></section>
-<div class="wedge wedge-in"></div><section class="sec band" id="contato"><div class="sec-in"><p class="kicker">/* fale comigo */</p><h2>Vamos construir<br>alguma coisa?</h2><div class="contact-grid"><div><p class="lead">Freelas, colaboração ou vaga de back-end — mande uma mensagem.</p><ul class="clist"><li><a href="https://github.com/jhowads25" target="_blank" rel="noopener">github.com/jhowads25</a></li></ul></div><form id="contactForm" novalidate><div class="field"><label for="f-nome">nome</label><input id="f-nome" required placeholder="Seu nome"></div><div class="field"><label for="f-mail">email</label><input id="f-mail" required type="email" placeholder="voce@email.com"></div><div class="field"><label for="f-msg">mensagem</label><textarea id="f-msg" required placeholder="Conta o que você precisa..."></textarea></div><button class="send" type="submit">Enviar mensagem</button><p id="formMsg" aria-live="polite"></p></form></div></div></section>
-</main><footer>JHOW.DEV — back-end, arquitetura e sistemas que vão pro ar.</footer><script src="script.js?v=19"></script></body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Portfólio de Jhonathan Fernandes — backend, APIs e sistemas."
+    />
+    <title>JHOW.DEV — Backend & Sistemas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=24" />
+    <noscript
+      ><style>
+        #boot {
+          display: none;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      </style></noscript
+    >
+  </head>
+  <body>
+    <div id="boot" aria-hidden="true">
+      <div id="bootGlitch"><div id="bootLines"></div></div>
+    </div>
+    <canvas id="dust" aria-hidden="true"></canvas>
+    <header class="nav">
+      <div class="nav-in">
+        <a href="#hero" class="brand">JHOW<span>.DEV</span></a>
+        <nav aria-label="Navegação principal">
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#arquitetura">Arquitetura</a></li>
+            <li><a href="#stack">Stack</a></li>
+            <li><a href="#trajetoria">Trajetória</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+        <div class="nav-tools">
+          <button
+            class="icon-btn burger"
+            id="burger"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+          >
+            ≡</button
+          ><button class="icon-btn" id="themeBtn" aria-label="Alternar tema">
+            ◐</button
+          ><span class="status"><span class="dot"></span>disponível</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="sec" id="hero">
+        <div class="hero-frame hero-grid">
+          <div class="hero-copy">
+            <p class="hero-tag hero-reveal" style="--intro-order: 0">
+              FULL STACK · CIBERSEGURANÇA · APIS REST
+            </p>
+            <h1
+              id="heroTitle"
+              data-text="DEVELOPER FULL&#10;STACK&#10;&amp; CYBER"
+            >
+              <span class="hero-line hero-reveal" style="--intro-order: 1"
+                >DEVELOPER FULL</span
+              ><span class="hero-line hero-reveal" style="--intro-order: 2"
+                >STACK</span
+              ><span class="hero-line hero-reveal hl" style="--intro-order: 3"
+                >&amp; CYBER</span
+              >
+            </h1>
+            <p class="hero-sub hero-reveal" style="--intro-order: 4">
+              Construo back-ends multi-tenant em Node.js e TypeScript — domínio
+              separado da infra, migrations versionadas e deploy confiável.
+            </p>
+            <div class="btn-row hero-reveal" style="--intro-order: 5">
+              <a class="btn btn-solid" href="#projetos">Ver projetos</a
+              ><a class="btn btn-ghost" href="#contato">Falar comigo</a>
+            </div>
+          </div>
+          <div class="hero-image-area">
+            <video
+              class="hero-logo"
+              autoplay
+              muted
+              loop
+              playsinline
+              poster="assets/Jhow-hero.png"
+              aria-label="Avatar animado de Jhonathan"
+            >
+              <source
+                src="assets/jhow-teste-transparent.webm?v=8"
+                type="video/webm"
+              />
+              <img src="assets/Jhow-hero.png" alt="Avatar de Jhonathan" />
+            </video>
+          </div>
+        </div>
+      </section>
+      <section class="sec" id="sobre">
+        <div class="sec-in">
+          <div class="about-grid">
+            <div class="stats reveal">
+              <div class="stat">
+                <div class="k">tenants_isolados</div>
+                <div class="v" data-count="1">0</div>
+                <div class="l">multi-tenant</div>
+              </div>
+              <div class="stat">
+                <div class="k">projetos_em_produção</div>
+                <div class="v" data-count="2">0</div>
+                <div class="l">rodando de verdade</div>
+              </div>
+              <div class="stat">
+                <div class="k">camadas_do_domínio</div>
+                <div class="v" data-count="4">0</div>
+                <div class="l">clean architecture</div>
+              </div>
+              <div class="stat">
+                <div class="k">migrations_rodadas</div>
+                <div class="v" data-count="60" data-suffix="+">0</div>
+                <div class="l">prisma migrate</div>
+              </div>
+            </div>
+            <div class="about-copy">
+              <p class="kicker">/* quem escreve o código */</p>
+              <h2>Back-end é onde<br />a regra mora.</h2>
+              <div class="reveal">
+                <p>
+                  Sou <strong>Jhonathan</strong>, desenvolvedor em Curitiba,
+                  cursando <em>Análise e Desenvolvimento de Sistemas</em> na
+                  UNINTER.
+                </p>
+                <p>
+                  Meu trabalho principal hoje é um
+                  <strong>SaaS médico multi-tenant</strong>: gestão de clínicas
+                  com isolamento por tenant, controle de acesso e microsserviço
+                  de atendimento.
+                </p>
+                <p>
+                  Sigo <em>Clean Architecture</em>: domínio no centro, framework
+                  na borda e teste no meio.
+                </p>
+                <div class="chips">
+                  <span class="chip">TypeScript</span
+                  ><span class="chip">Node.js</span
+                  ><span class="chip">Prisma</span
+                  ><span class="chip">Express</span
+                  ><span class="chip">React</span
+                  ><span class="chip">PostgreSQL</span
+                  ><span class="chip">Docker</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="wedge wedge-in"></div>
+      <section class="sec band" id="projetos">
+        <div class="sec-in">
+          <div class="head-row">
+            <div>
+              <p class="kicker">/* o que já está de pé */</p>
+              <h2>Cada projeto resolveu<br />um problema real.</h2>
+            </div>
+            <span class="kicker" id="projCount">4 no total</span>
+          </div>
+          <p class="lead">Sistemas com usuários, banco relacional e deploy.</p>
+          <div class="filters">
+            <button class="fchip on" data-f="todos" aria-pressed="true">
+              Todos</button
+            ><button class="fchip" data-f="saas" aria-pressed="false">
+              SaaS</button
+            ><button class="fchip" data-f="api" aria-pressed="false">API</button
+            ><button class="fchip" data-f="web" aria-pressed="false">
+              Web
+            </button>
+          </div>
+          <div class="proj-grid">
+            <article class="proj tilt" data-tag="saas">
+              <div class="p-top">
+                <h3>Clinic Platform</h3>
+                <span class="p-tag">SaaS</span>
+              </div>
+              <p class="p-stack">Node.js · TypeScript · Prisma · PostgreSQL</p>
+              <p class="p-desc">
+                Plataforma multi-tenant de gestão de clínicas com agenda,
+                pacientes, RBAC e isolamento.
+              </p>
+              <a class="p-link" href="#contato">Ver detalhes</a>
+            </article>
+            <article class="proj tilt" data-tag="api">
+              <div class="p-top">
+                <h3>motor-atendimento</h3>
+                <span class="p-tag">API</span>
+              </div>
+              <p class="p-stack">Node.js · Express · Prisma</p>
+              <p class="p-desc">
+                Microsserviço de fluxo de atendimento integrado à plataforma
+                principal.
+              </p>
+              <a class="p-link" href="#contato">Ver detalhes</a>
+            </article>
+            <article class="proj tilt" data-tag="web">
+              <div class="p-top">
+                <h3>Bolão da Resenha</h3>
+                <span class="p-tag">Web</span>
+              </div>
+              <p class="p-stack">React · Vite · Node.js · MySQL</p>
+              <p class="p-desc">
+                Palpites, apuração automática e ranking em tempo real.
+              </p>
+              <a class="p-link" href="#contato">Ver detalhes</a>
+            </article>
+            <article class="proj tilt" data-tag="api">
+              <div class="p-top">
+                <h3>Seu próximo projeto</h3>
+                <span class="p-tag">API</span>
+              </div>
+              <p class="p-desc">
+                Espaço reservado para o próximo sistema colocado no ar.
+              </p>
+              <a class="p-link" href="#contato">Conversar</a>
+            </article>
+          </div>
+        </div>
+      </section>
+      <div class="wedge wedge-out"></div>
+      <section class="sec" id="arquitetura">
+        <div class="sec-in">
+          <p class="kicker">/* infra e deploy */</p>
+          <h2>Colocar no ar é<br />parte do trabalho.</h2>
+          <p class="lead">
+            Migrations versionadas, variáveis fora do código, log acessível e
+            rollback possível.
+          </p>
+          <div class="term-grid">
+            <div class="term reveal">
+              <div class="term-bar"><i></i><i></i><i></i></div>
+              <div class="term-body" id="termBody"></div>
+            </div>
+            <div class="reveal">
+              <div class="side-block">
+                <p class="side-t">o que cuido</p>
+                <div class="chips">
+                  <span class="chip">Docker</span
+                  ><span class="chip">Railway</span
+                  ><span class="chip">Prisma Migrate</span
+                  ><span class="chip">JWT / RBAC</span
+                  ><span class="chip">CI básico</span>
+                </div>
+              </div>
+              <div class="side-block">
+                <p class="side-t">princípio que sigo</p>
+                <p>
+                  Banco é fonte da verdade, schema é código e todo ambiente sobe
+                  do zero com um comando.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="wedge wedge-in"></div>
+      <section class="sec band" id="stack">
+        <div class="sec-in">
+          <p class="kicker">/* ferramentas do dia a dia */</p>
+          <h2>A stack por trás<br />dos projetos.</h2>
+          <div class="stack-grid">
+            <div class="skills"></div>
+            <div class="icons">
+              <div class="ico">
+                <div>TS</div>
+                TypeScript
+              </div>
+              <div class="ico">
+                <div>JS</div>
+                JavaScript
+              </div>
+              <div class="ico">
+                <div>N</div>
+                Node.js
+              </div>
+              <div class="ico">
+                <div>Ex</div>
+                Express
+              </div>
+              <div class="ico">
+                <div>Pr</div>
+                Prisma
+              </div>
+              <div class="ico">
+                <div>Pg</div>
+                PostgreSQL
+              </div>
+              <div class="ico">
+                <div>R</div>
+                React
+              </div>
+              <div class="ico">
+                <div>Dk</div>
+                Docker
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="wedge wedge-out"></div>
+      <section class="sec" id="trajetoria">
+        <div class="sec-in">
+          <p class="kicker">/* como cheguei aqui */</p>
+          <h2>Trajetória.</h2>
+          <div class="tl">
+            <div class="tl-item reveal">
+              <p class="tl-when">2025</p>
+              <p class="tl-what">Primeiros sistemas em produção</p>
+              <p>
+                Autenticação, banco relacional e deploy para usuários reais.
+              </p>
+            </div>
+            <div class="tl-item reveal">
+              <p class="tl-when">2025 — 2026</p>
+              <p class="tl-what">Arquitetura e disciplina</p>
+              <p>
+                Casos de uso isolados, repositórios como contrato e Prisma como
+                detalhe de infra.
+              </p>
+            </div>
+            <div class="tl-item reveal">
+              <p class="tl-when">2026 — agora</p>
+              <p class="tl-what">SaaS médico multi-tenant</p>
+              <p>
+                MVP com modelagem de domínio, isolamento por tenant, RBAC e
+                microsserviço.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="wedge wedge-in"></div>
+      <section class="sec band" id="contato">
+        <div class="sec-in">
+          <p class="kicker">/* fale comigo */</p>
+          <h2>Vamos construir<br />alguma coisa?</h2>
+          <div class="contact-grid">
+            <div>
+              <p class="lead">
+                Freelas, colaboração ou vaga de back-end — mande uma mensagem.
+              </p>
+              <ul class="clist">
+                <li>
+                  <a
+                    href="https://github.com/jhowads25"
+                    target="_blank"
+                    rel="noopener"
+                    >github.com/jhowads25</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <form id="contactForm" novalidate>
+              <div class="field">
+                <label for="f-nome">nome</label
+                ><input id="f-nome" required placeholder="Seu nome" />
+              </div>
+              <div class="field">
+                <label for="f-mail">email</label
+                ><input
+                  id="f-mail"
+                  required
+                  type="email"
+                  placeholder="voce@email.com"
+                />
+              </div>
+              <div class="field">
+                <label for="f-msg">mensagem</label
+                ><textarea
+                  id="f-msg"
+                  required
+                  placeholder="Conta o que você precisa..."
+                ></textarea>
+              </div>
+              <button class="send" type="submit">Enviar mensagem</button>
+              <p id="formMsg" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>JHOW.DEV — back-end, arquitetura e sistemas que vão pro ar.</footer>
+    <script src="script.js?v=20"></script>
+  </body>
+</html>
