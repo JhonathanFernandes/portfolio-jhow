@@ -488,9 +488,14 @@
     document.querySelectorAll(".tilt").forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const r = card.getBoundingClientRect();
-        const rx = ((e.clientY - r.top) / r.height - 0.5) * -7;
-        const ry = ((e.clientX - r.left) / r.width - 0.5) * 7;
-        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const maxTilt = 10;
+        const ry = (px - 0.5) * maxTilt * 2;
+        const rx = (0.5 - py) * maxTilt * 2;
+        card.style.setProperty("--mx", `${px * 100}%`);
+        card.style.setProperty("--my", `${py * 100}%`);
+        card.style.transform = `perspective(900px) translateY(-9px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px) scale(1.035)`;
       });
       card.addEventListener("mouseleave", () => (card.style.transform = ""));
     });
@@ -515,9 +520,9 @@
     ".about-copy .reveal > p:nth-child(1)": "I'm <strong>Jhonathan</strong>, a developer based in Curitiba, studying <em>Systems Analysis and Development</em> at UNINTER.",
     ".about-copy .reveal > p:nth-child(2)": "My main project today is a <strong>multi-tenant medical SaaS</strong>: clinic management with tenant isolation, access control and a patient-flow microservice.",
     ".about-copy .reveal > p:nth-child(3)": "I follow <em>Clean Architecture</em>: domain at the center, framework at the edge and tests in between.",
-    "#projetos .head-row .kicker": "/* what is already live */",
-    "#projetos h2": "Every project solved<br>a real problem.",
-    "#projetos > .sec-in > .lead": "Systems with users, relational databases and deployment.",
+    "#projetos .head-row > div .kicker": "/* projects I've built */",
+    "#projetos h2": "Where front end, back end<br>and systems meet.",
+    "#projetos > .sec-in > .lead": "Each project below solves a real problem — architecture, data, integration or experience.",
     ".fchip[data-f='todos']": "All",
     ".proj:nth-child(1) .p-desc": "Multi-tenant clinic management platform with scheduling, patients, RBAC and isolation.",
     ".proj:nth-child(2) .p-desc": "Patient-flow microservice integrated with the main platform.",
@@ -595,6 +600,13 @@
     const langButton = document.querySelector("#langBtn");
     langButton.textContent = language === "en" ? "PT" : "EN";
     langButton.setAttribute("aria-label", language === "en" ? "Mudar idioma para português" : "Mudar idioma para inglês");
+    const commandButton = document.querySelector("#cmdkTrigger");
+    const commandDialog = document.querySelector(".cmdk-box");
+    const commandCloseButton = document.querySelector("#cmdkClose");
+    commandButton.setAttribute("aria-label", language === "en" ? "Open navigation terminal" : "Abrir terminal de navegação");
+    commandButton.title = language === "en" ? "Open terminal (press /)" : "Abrir terminal (pressione /)";
+    commandDialog.setAttribute("aria-label", language === "en" ? "Navigation terminal" : "Terminal de navegação");
+    commandCloseButton.setAttribute("aria-label", language === "en" ? "Close terminal" : "Fechar terminal");
     document.querySelectorAll("main section h2").forEach((heading) => heading.dataset.text = heading.innerText);
     title.dataset.text = title.innerText;
     updateProjectCount();
@@ -627,5 +639,131 @@
         : badMail
           ? "Informe um email válido."
           : "Formulário pronto; falta conectar um serviço de envio.";
+  });
+
+  // Barra de progresso e navegação com transparência progressiva.
+  const scrollProgress = document.querySelector("#scrollProgress");
+  const mainNav = document.querySelector(".nav");
+  const updateScrollUi = () => {
+    const page = document.documentElement;
+    const available = page.scrollHeight - page.clientHeight;
+    const progress = available > 0 ? (page.scrollTop / available) * 100 : 0;
+    scrollProgress.style.width = `${Math.min(100, progress)}%`;
+    mainNav.classList.toggle("scrolled", scrollY > 40);
+  };
+  addEventListener("scroll", updateScrollUi, { passive: true });
+  addEventListener("resize", updateScrollUi);
+  updateScrollUi();
+
+  // Ripple e magnetismo leve nos CTAs, sem interferir com toque ou acessibilidade.
+  const interactiveButtons = document.querySelectorAll(".btn, .send");
+  const finePointer = matchMedia("(pointer: fine)").matches;
+  interactiveButtons.forEach((button) => {
+    if (!reduce && finePointer) {
+      button.addEventListener("mousemove", (event) => {
+        const rect = button.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        button.style.transform = `translate(${x * 0.08}px, ${y * 0.14}px)`;
+      });
+      button.addEventListener("mouseleave", () => (button.style.transform = ""));
+    }
+    button.addEventListener("click", (event) => {
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height) * 1.7;
+      const ripple = document.createElement("span");
+      ripple.className = "ripple";
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
+      button.appendChild(ripple);
+      ripple.addEventListener("animationend", () => ripple.remove());
+    });
+  });
+
+  // Terminal de navegação: clique no >_ ou pressione "/".
+  const commandOverlay = document.querySelector("#cmdk");
+  const commandInput = document.querySelector("#cmdkInput");
+  const commandOutput = document.querySelector("#cmdkOutput");
+  const commandTrigger = document.querySelector("#cmdkTrigger");
+  const commandClose = document.querySelector("#cmdkClose");
+  const commandText = (pt, en) => currentLanguage === "en" ? en : pt;
+  const openCommand = () => {
+    commandOverlay.classList.add("open");
+    commandOverlay.setAttribute("aria-hidden", "false");
+    commandInput.placeholder = commandText('digite "help"...', 'type "help"...');
+    commandInput.value = "";
+    setTimeout(() => commandInput.focus(), 30);
+  };
+  const closeCommand = () => {
+    commandOverlay.classList.remove("open");
+    commandOverlay.setAttribute("aria-hidden", "true");
+    commandTrigger.focus();
+  };
+  const navigateCommand = (section) => {
+    location.hash = section;
+    closeCommand();
+    return commandText(`navegando para ${section}...`, `navigating to ${section}...`);
+  };
+  const commandActions = {
+    help: () => commandText(
+      "comandos: inicio · sobre · projetos · arquitetura · stack · trajetoria · contato · tema · idioma · github · clear",
+      "commands: home · about · projects · architecture · stack · journey · contact · theme · language · github · clear",
+    ),
+    inicio: () => navigateCommand("#hero"),
+    home: () => navigateCommand("#hero"),
+    sobre: () => navigateCommand("#sobre"),
+    about: () => navigateCommand("#sobre"),
+    projetos: () => navigateCommand("#projetos"),
+    projects: () => navigateCommand("#projetos"),
+    arquitetura: () => navigateCommand("#arquitetura"),
+    architecture: () => navigateCommand("#arquitetura"),
+    stack: () => navigateCommand("#stack"),
+    trajetoria: () => navigateCommand("#trajetoria"),
+    journey: () => navigateCommand("#trajetoria"),
+    contato: () => navigateCommand("#contato"),
+    contact: () => navigateCommand("#contato"),
+    tema: () => { themeButton.click(); return commandText("tema alternado.", "theme switched."); },
+    theme: () => commandActions.tema(),
+    idioma: () => { applyLanguage(currentLanguage === "pt" ? "en" : "pt"); return commandText("idioma alternado.", "language switched."); },
+    language: () => commandActions.idioma(),
+    github: () => { open("https://github.com/jhowads25", "_blank", "noopener"); return "github.com/jhowads25 ↗"; },
+    clear: () => { commandOutput.innerHTML = ""; return null; },
+    exit: () => { closeCommand(); return null; },
+  };
+  commandTrigger.addEventListener("click", openCommand);
+  commandClose.addEventListener("click", closeCommand);
+  commandOverlay.addEventListener("click", (event) => {
+    if (event.target === commandOverlay) closeCommand();
+  });
+  document.addEventListener("keydown", (event) => {
+    const typing = ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName);
+    if (event.key === "/" && !typing) {
+      event.preventDefault();
+      openCommand();
+    } else if (event.key === "Escape" && commandOverlay.classList.contains("open")) {
+      closeCommand();
+    }
+  });
+  commandInput.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    const raw = commandInput.value.trim();
+    if (!raw) return;
+    const line = document.createElement("div");
+    line.className = "cmdk-line";
+    line.textContent = `$ ${raw}`;
+    commandOutput.appendChild(line);
+    const action = commandActions[raw.toLowerCase()];
+    const result = action
+      ? action()
+      : commandText(`comando não encontrado: ${raw}`, `command not found: ${raw}`);
+    if (result) {
+      const response = document.createElement("div");
+      response.className = `cmdk-result${action ? "" : " cmdk-error"}`;
+      response.textContent = result;
+      commandOutput.appendChild(response);
+    }
+    commandOutput.scrollTop = commandOutput.scrollHeight;
+    commandInput.value = "";
   });
 })();

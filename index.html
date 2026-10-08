@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=27" />
+    <link rel="stylesheet" href="style.css?v=34" />
     <noscript
       ><style>
         #boot {
@@ -35,6 +35,7 @@
       <div id="bootGlitch"><div id="bootLines"></div></div>
     </div>
     <canvas id="dust" aria-hidden="true"></canvas>
+    <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
     <header class="nav">
       <div class="nav-in">
         <a href="#hero" class="brand">JHOW<span>.DEV</span></a>
@@ -97,6 +98,13 @@
             </div>
           </div>
           <div class="hero-image-area">
+            <div class="hero-shapes" aria-hidden="true">
+              <span class="hero-shape shape-orbit"></span>
+              <span class="hero-shape shape-disc"></span>
+              <span class="hero-shape shape-square"></span>
+              <span class="hero-shape shape-dot shape-dot-a"></span>
+              <span class="hero-shape shape-dot shape-dot-b"></span>
+            </div>
             <video
               class="hero-logo"
               autoplay
@@ -176,15 +184,15 @@
       <div class="wedge wedge-in"></div>
       <section class="sec band" id="projetos">
         <div class="sec-in">
-          <div class="head-row">
+          <div class="head-row reveal">
             <div>
-              <p class="kicker">/* o que já está de pé */</p>
-              <h2>Cada projeto resolveu<br />um problema real.</h2>
+              <p class="kicker">/* projetos que construí */</p>
+              <h2>Onde front-end, back-end<br />e sistemas se encontram.</h2>
             </div>
             <span class="kicker" id="projCount">4 no total</span>
           </div>
-          <p class="lead">Sistemas com usuários, banco relacional e deploy.</p>
-          <div class="filters">
+          <p class="lead reveal">Cada projeto abaixo resolve um problema real — de arquitetura, dados, integração ou experiência.</p>
+          <div class="filters reveal">
             <button class="fchip on" data-f="todos" aria-pressed="true">
               Todos</button
             ><button class="fchip" data-f="saas" aria-pressed="false">
@@ -195,7 +203,7 @@
             </button>
           </div>
           <div class="proj-grid">
-            <article class="proj tilt" data-tag="saas">
+            <article class="proj tilt reveal" data-tag="saas">
               <div class="p-top">
                 <h3>Clinic Platform</h3>
                 <span class="p-tag">SaaS</span>
@@ -207,7 +215,7 @@
               </p>
               <a class="p-link" href="#contato">Ver detalhes</a>
             </article>
-            <article class="proj tilt" data-tag="api">
+            <article class="proj tilt reveal" data-tag="api">
               <div class="p-top">
                 <h3>motor-atendimento</h3>
                 <span class="p-tag">API</span>
@@ -219,7 +227,7 @@
               </p>
               <a class="p-link" href="#contato">Ver detalhes</a>
             </article>
-            <article class="proj tilt" data-tag="web">
+            <article class="proj tilt reveal" data-tag="web">
               <div class="p-top">
                 <h3>Bolão da Resenha</h3>
                 <span class="p-tag">Web</span>
@@ -230,7 +238,7 @@
               </p>
               <a class="p-link" href="#contato">Ver detalhes</a>
             </article>
-            <article class="proj tilt" data-tag="api">
+            <article class="proj tilt reveal" data-tag="api">
               <div class="p-top">
                 <h3>Seu próximo projeto</h3>
                 <span class="p-tag">API</span>
@@ -262,7 +270,6 @@
                 <p class="side-t">o que cuido</p>
                 <div class="chips">
                   <span class="chip">Docker</span
-                  ><span class="chip">Railway</span
                   ><span class="chip">Prisma Migrate</span
                   ><span class="chip">JWT / RBAC</span
                   ><span class="chip">CI básico</span>
@@ -406,6 +413,23 @@
       </section>
     </main>
     <footer>JHOW.DEV — back-end, arquitetura e sistemas que vão pro ar.</footer>
-    <script src="script.js?v=24"></script>
+    <button
+      id="cmdkTrigger"
+      class="cmdk-trigger"
+      type="button"
+      aria-label="Abrir terminal de navegação"
+      title="Abrir terminal (pressione /)"
+    >&gt;_</button>
+    <div id="cmdk" class="cmdk-overlay" aria-hidden="true">
+      <div class="cmdk-box" role="dialog" aria-modal="true" aria-label="Terminal de navegação">
+        <div class="cmdk-head"><span>JHOW.DEV / COMMAND</span><button id="cmdkClose" type="button" aria-label="Fechar terminal">×</button></div>
+        <div class="cmdk-input-row">
+          <span class="cmdk-prompt">$</span>
+          <input id="cmdkInput" type="text" placeholder='digite "help"...' autocomplete="off" spellcheck="false" />
+        </div>
+        <div class="cmdk-output" id="cmdkOutput" aria-live="polite"></div>
+      </div>
+    </div>
+    <script src="script.js?v=30"></script>
   </body>
 </html>
