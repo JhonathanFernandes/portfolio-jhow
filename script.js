@@ -261,6 +261,25 @@
   }
   updateThemeButton();
 
+  // Mantém o avatar animado em loop mesmo em navegadores que pausam WebM transparente.
+  const avatarVideo = document.querySelector(".hero-logo");
+  const playAvatar = (restart = false) => {
+    if (!avatarVideo || document.hidden) return;
+    avatarVideo.muted = true;
+    if (restart || avatarVideo.ended) avatarVideo.currentTime = 0;
+    if (avatarVideo.paused) avatarVideo.play().catch(() => {});
+  };
+  avatarVideo.addEventListener("loadeddata", () => playAvatar());
+  avatarVideo.addEventListener("ended", () => playAvatar(true));
+  avatarVideo.addEventListener("pause", () => {
+    if (!avatarVideo.ended) setTimeout(() => playAvatar(), 120);
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) playAvatar(avatarVideo.ended);
+  });
+  setInterval(() => playAvatar(avatarVideo.ended), 1800);
+  playAvatar();
+
   const navLinks = document.querySelector("#navLinks");
   const burger = document.querySelector("#burger");
   burger.addEventListener("click", () => {
