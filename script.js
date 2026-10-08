@@ -1,10 +1,11 @@
 (() => {
   "use strict";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let currentLanguage = localStorage.getItem("language") === "en" ? "en" : "pt";
   document.body.classList.add("intro-pending");
 
   // Efeito de TV (glitch + flicker): usado nos títulos e na tela de boot.
-  const blinkTitle = (element, ms = 300) => {
+  const blinkTitle = (element, ms = 800) => {
     element.classList.remove("glitching");
     void element.offsetWidth;
     element.classList.add("glitching");
@@ -27,10 +28,12 @@
   const bootLines = [
     ["jhow@dev:~$ ./init.sh", ""],
     ["carregando domínio...............[ok]", "ok"],
-    ["conectando ao banco............[ok]", "ok"],
+    ["conectando ao banco..............[ok]", "ok"],
     ["aplicando migrations.............[ok]", "ok"],
     ["servidor pronto na porta 3000", "ok"],
-    ["bem-vindo!", "dim"],
+    ["", ""],
+    ["BEM VINDO AO MEU MUNDO!", "ok"],
+    ["WELCOME TO MY WORLD!", "dim"],
   ];
   // Bloco centralizado na tela, com todas as linhas alinhadas à esquerda na mesma margem.
   boot.style.setProperty(
@@ -144,7 +147,7 @@
         alpha: Math.random() * 0.5 + 0.18,
         depth: Math.random() * 0.8 + 0.2,
         phase: Math.random() * Math.PI * 2,
-        color: Math.random() > 0.72 ? "124,255,196" : "53,230,160",
+        color: Math.random() > 0.72 ? "255,255,255" : "220,248,234",
       }),
     );
   };
@@ -204,6 +207,7 @@
   );
 
   const title = document.querySelector("#heroTitle");
+  title.dataset.text = title.innerText;
   const sectionTitles = [...document.querySelectorAll("main section h2")];
   sectionTitles.forEach((sectionTitle) => {
     sectionTitle.classList.add("tv-glitch");
@@ -211,7 +215,7 @@
   });
   const glitchTitles = [title, ...sectionTitles];
   if (!reduce) {
-    setInterval(() => glitchTitles.forEach(blinkTitle), 9000);
+    setInterval(() => glitchTitles.forEach((heading) => blinkTitle(heading)), 4200);
     const titleObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
@@ -225,9 +229,23 @@
   }
 
   const root = document.documentElement;
-  document.querySelector("#themeBtn").addEventListener("click", () => {
+  const themeButton = document.querySelector("#themeBtn");
+  const updateThemeButton = () => {
+    const targetIsLight = root.dataset.theme === "dark";
+    themeButton.textContent = targetIsLight ? "☀" : "☾";
+    const targetName = currentLanguage === "en"
+      ? targetIsLight ? "light theme" : "dark theme"
+      : targetIsLight ? "tema claro" : "tema escuro";
+    const label = currentLanguage === "en"
+      ? `Switch to ${targetName}`
+      : `Mudar para ${targetName}`;
+    themeButton.setAttribute("aria-label", label);
+    themeButton.title = targetName.charAt(0).toUpperCase() + targetName.slice(1);
+  };
+  themeButton.addEventListener("click", () => {
     const next = root.dataset.theme === "dark" ? "light" : "dark";
     root.dataset.theme = next;
+    updateThemeButton();
     try {
       localStorage.setItem("theme", next);
     } catch (e) {
@@ -241,6 +259,7 @@
   } catch (e) {
     /* storage bloqueado: mantém o tema padrão */
   }
+  updateThemeButton();
 
   const navLinks = document.querySelector("#navLinks");
   const burger = document.querySelector("#burger");
@@ -398,9 +417,9 @@
     ["p", "jhow@infra:~$ ", "docker compose up -d"],
     ["o", "", "api ✓   postgres ✓   redis ✓"],
     ["p", "jhow@infra:~$ ", "npx prisma migrate deploy"],
-    ["o", "", "3 migrations aplicadas · schema em dia"],
+    ["o", "", { pt: "3 migrations aplicadas · schema em dia", en: "3 migrations applied · schema up to date" }],
     ["p", "jhow@infra:~$ ", "railway logs --tail"],
-    ["o", "", "[api] listening on :3000 · tenant resolver ativo"],
+    ["o", "", { pt: "[api] listening on :3000 · tenant resolver ativo", en: "[api] listening on :3000 · tenant resolver active" }],
     ["p", "jhow@infra:~$ ", ""],
   ];
   let terminalStarted = false;
@@ -414,7 +433,10 @@
       const type = () => {
         if (row >= commands.length)
           return (term.innerHTML = `${output}<span class="term-caret"></span>`);
-        const [kind, prompt, text] = commands[row];
+        const [kind, prompt, translatedText] = commands[row];
+        const text = typeof translatedText === "string"
+          ? translatedText
+          : translatedText[currentLanguage];
         if (kind === "o") {
           output += `<span class="out">${text}</span>\n`;
           row++;
@@ -456,8 +478,9 @@
         project.classList.toggle("hidden", !visible);
         if (visible) shown++;
       });
-      document.querySelector("#projCount").textContent =
-        shown === 1 ? "1 projeto" : `${shown} no total`;
+      document.querySelector("#projCount").textContent = currentLanguage === "en"
+        ? shown === 1 ? "1 project" : `${shown} total`
+        : shown === 1 ? "1 projeto" : `${shown} no total`;
     }),
   );
 
@@ -472,16 +495,137 @@
       card.addEventListener("mouseleave", () => (card.style.transform = ""));
     });
 
+  const englishContent = {
+    ".nav-links li:nth-child(1) a": "About",
+    ".nav-links li:nth-child(2) a": "Projects",
+    ".nav-links li:nth-child(3) a": "Architecture",
+    ".nav-links li:nth-child(4) a": "Stack",
+    ".nav-links li:nth-child(5) a": "Journey",
+    ".nav-links li:nth-child(6) a": "Contact",
+    ".hero-sub": "I build multi-tenant back ends with Node.js and TypeScript — domain separated from infrastructure, versioned migrations and reliable deployments.",
+    ".btn-solid": "View projects",
+    ".btn-ghost": "&gt;_ OPEN RÉSUMÉ",
+    ".stat:nth-child(1) .k": "isolated_tenants",
+    ".stat:nth-child(2) .k": "projects_in_production",
+    ".stat:nth-child(2) .l": "running for real",
+    ".stat:nth-child(3) .k": "domain_layers",
+    ".stat:nth-child(4) .k": "migrations_run",
+    ".about-copy > .kicker": "/* who writes the code */",
+    "#sobre h2": "Back end is where<br>the rules live.",
+    ".about-copy .reveal > p:nth-child(1)": "I'm <strong>Jhonathan</strong>, a developer based in Curitiba, studying <em>Systems Analysis and Development</em> at UNINTER.",
+    ".about-copy .reveal > p:nth-child(2)": "My main project today is a <strong>multi-tenant medical SaaS</strong>: clinic management with tenant isolation, access control and a patient-flow microservice.",
+    ".about-copy .reveal > p:nth-child(3)": "I follow <em>Clean Architecture</em>: domain at the center, framework at the edge and tests in between.",
+    "#projetos .head-row .kicker": "/* what is already live */",
+    "#projetos h2": "Every project solved<br>a real problem.",
+    "#projetos > .sec-in > .lead": "Systems with users, relational databases and deployment.",
+    ".fchip[data-f='todos']": "All",
+    ".proj:nth-child(1) .p-desc": "Multi-tenant clinic management platform with scheduling, patients, RBAC and isolation.",
+    ".proj:nth-child(2) .p-desc": "Patient-flow microservice integrated with the main platform.",
+    ".proj:nth-child(3) h3": "Prediction League",
+    ".proj:nth-child(3) .p-desc": "Predictions, automatic scoring and real-time rankings.",
+    ".p-link": "View details",
+    ".proj:nth-child(4) h3": "Your next project",
+    ".proj:nth-child(4) .p-desc": "Space reserved for the next system launched into production.",
+    ".proj:nth-child(4) .p-link": "Let's talk",
+    "#arquitetura > .sec-in > .kicker": "/* infrastructure and deployment */",
+    "#arquitetura h2": "Going live is<br>part of the job.",
+    "#arquitetura > .sec-in > .lead": "Versioned migrations, variables outside the codebase, accessible logs and possible rollbacks.",
+    "#arquitetura .side-block:nth-child(1) .side-t": "what I handle",
+    "#arquitetura .side-block:nth-child(2) .side-t": "principle I follow",
+    "#arquitetura .side-block:nth-child(2) > p:last-child": "The database is the source of truth, the schema is code, and every environment starts from scratch with one command.",
+    "#arquitetura .chip:last-child": "Basic CI",
+    "#stack > .sec-in > .kicker": "/* everyday tools */",
+    "#stack h2": "The stack behind<br>the projects.",
+    ".skills > .lead": "Self-assessed proficiency level.",
+    "#trajetoria > .sec-in > .kicker": "/* how I got here */",
+    "#trajetoria h2": "Journey.",
+    ".tl-item:nth-child(1) .tl-what": "First production systems",
+    ".tl-item:nth-child(1) > p:last-child": "Authentication, relational databases and deployment for real users.",
+    ".tl-item:nth-child(2) .tl-what": "Architecture and discipline",
+    ".tl-item:nth-child(2) > p:last-child": "Isolated use cases, repositories as contracts and Prisma as an infrastructure detail.",
+    ".tl-item:nth-child(3) .tl-when": "2026 — now",
+    ".tl-item:nth-child(3) .tl-what": "Multi-tenant medical SaaS",
+    ".tl-item:nth-child(3) > p:last-child": "MVP with domain modeling, tenant isolation, RBAC and a microservice.",
+    "#contato > .sec-in > .kicker": "/* contact me */",
+    "#contato h2": "Shall we build<br>something together?",
+    "#contato .contact-grid .lead": "Freelance work, collaboration or a back-end role — send me a message.",
+    "label[for='f-nome']": "name",
+    "label[for='f-mail']": "email",
+    "label[for='f-msg']": "message",
+    ".send": "Send message",
+    "footer": "JHOW.DEV — back end, architecture and systems that go live."
+  };
+  const portugueseContent = new Map();
+  Object.keys(englishContent).forEach((selector) => {
+    document.querySelectorAll(selector).forEach((element, index) => {
+      portugueseContent.set(`${selector}::${index}`, element.innerHTML);
+    });
+  });
+  const placeholders = {
+    "#f-nome": { pt: "Seu nome", en: "Your name" },
+    "#f-mail": { pt: "voce@email.com", en: "you@email.com" },
+    "#f-msg": { pt: "Conta o que você precisa...", en: "Tell me what you need..." }
+  };
+  const updateProjectCount = () => {
+    const shown = projects.filter((project) => !project.classList.contains("hidden")).length;
+    document.querySelector("#projCount").textContent = currentLanguage === "en"
+      ? shown === 1 ? "1 project" : `${shown} total`
+      : shown === 1 ? "1 projeto" : `${shown} no total`;
+  };
+  const applyLanguage = (language) => {
+    currentLanguage = language;
+    document.documentElement.lang = language === "en" ? "en" : "pt-BR";
+    Object.entries(englishContent).forEach(([selector, english]) => {
+      document.querySelectorAll(selector).forEach((element, index) => {
+        element.innerHTML = language === "en"
+          ? english
+          : portugueseContent.get(`${selector}::${index}`);
+      });
+    });
+    Object.entries(placeholders).forEach(([selector, values]) => {
+      document.querySelector(selector).placeholder = values[language];
+    });
+    document.querySelector('meta[name="description"]').content = language === "en"
+      ? "Jhonathan Fernandes' portfolio — back end, APIs and systems."
+      : "Portfólio de Jhonathan Fernandes — backend, APIs e sistemas.";
+    document.title = language === "en" ? "JHOW.DEV — Back End & Systems" : "JHOW.DEV — Backend & Sistemas";
+    document.querySelector("header nav").setAttribute("aria-label", language === "en" ? "Main navigation" : "Navegação principal");
+    document.querySelector("#burger").setAttribute("aria-label", language === "en" ? "Open menu" : "Abrir menu");
+    updateThemeButton();
+    const langButton = document.querySelector("#langBtn");
+    langButton.textContent = language === "en" ? "PT" : "EN";
+    langButton.setAttribute("aria-label", language === "en" ? "Mudar idioma para português" : "Mudar idioma para inglês");
+    document.querySelectorAll("main section h2").forEach((heading) => heading.dataset.text = heading.innerText);
+    title.dataset.text = title.innerText;
+    updateProjectCount();
+    term.querySelectorAll(".out").forEach((line, index) => {
+      const outputCommands = commands.filter(([kind]) => kind === "o");
+      const value = outputCommands[index]?.[2];
+      if (value && typeof value !== "string") line.textContent = value[language];
+    });
+    localStorage.setItem("language", language);
+  };
+  document.querySelector("#langBtn").addEventListener("click", () => {
+    applyLanguage(currentLanguage === "pt" ? "en" : "pt");
+  });
+  applyLanguage(currentLanguage);
+
   document.querySelector("#contactForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const fields = [...e.currentTarget.querySelectorAll("[required]")];
     const empty = fields.some((field) => !field.value.trim());
     const badMail =
       !empty && !document.querySelector("#f-mail").checkValidity();
-    document.querySelector("#formMsg").textContent = empty
-      ? "Preencha nome, email e mensagem para enviar."
-      : badMail
-        ? "Informe um email válido."
-        : "Formulário pronto; falta conectar um serviço de envio.";
+    document.querySelector("#formMsg").textContent = currentLanguage === "en"
+      ? empty
+        ? "Fill in your name, email and message."
+        : badMail
+          ? "Enter a valid email address."
+          : "The form is ready; a delivery service still needs to be connected."
+      : empty
+        ? "Preencha nome, email e mensagem para enviar."
+        : badMail
+          ? "Informe um email válido."
+          : "Formulário pronto; falta conectar um serviço de envio.";
   });
 })();

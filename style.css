@@ -120,14 +120,18 @@ a {
 }
 
 #bootGlitch {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
   width: min(calc(var(--boot-chars, 32) * 1ch + 1ch), 100%);
 }
 #bootGlitch.glitching {
-  animation:
-    glitch 0.45s steps(2),
-    boot-flicker 0.45s linear;
+  animation: boot-flicker 0.45s linear;
+}
+#bootGlitch.glitching #bootLines {
+  animation: boot-text-glitch 0.45s steps(2);
 }
 @keyframes boot-flicker {
   20% {
@@ -135,6 +139,24 @@ a {
   }
   45% {
     filter: brightness(0.75);
+  }
+}
+@keyframes boot-text-glitch {
+  0% {
+    clip-path: inset(0 0 72%);
+    transform: translateX(-3px);
+  }
+  40% {
+    clip-path: inset(64% 0 8%);
+    transform: translateX(4px);
+  }
+  80% {
+    clip-path: inset(50% 0 20%);
+    transform: translateX(-2px);
+  }
+  100% {
+    clip-path: none;
+    transform: none;
   }
 }
 #bootGlitch.glitching #bootLines::before,
@@ -309,6 +331,12 @@ a {
   border-color: var(--accent);
   transform: translateY(-1px);
 }
+#themeBtn {
+  font-size: 22px;
+  line-height: 1;
+  display: inline-grid;
+  place-items: center;
+}
 .status {
   display: flex;
   align-items: center;
@@ -320,6 +348,15 @@ a {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
+}
+.language-toggle {
+  background: transparent;
+  font-family: var(--mono);
+  cursor: pointer;
+}
+.language-toggle:hover {
+  background: var(--accent);
+  color: #05100a;
 }
 .dot {
   width: 7px;
@@ -437,18 +474,44 @@ a {
 }
 #heroTitle.glitching:before {
   color: #ff2d6b;
-  transform: translate(-4px, 1px);
   mix-blend-mode: screen;
+  animation: title-glitch-red 0.8s steps(1, end) both;
 }
 #heroTitle.glitching:after {
   color: #2dfff0;
-  transform: translate(4px, -1px);
   mix-blend-mode: screen;
+  animation: title-glitch-cyan 0.8s steps(1, end) both;
 }
 #heroTitle.glitching {
-  animation:
-    glitch 0.3s steps(2),
-    flicker 0.3s linear;
+  animation: title-tv-flicker 0.8s linear both;
+}
+@keyframes title-glitch-red {
+  0%, 100% { opacity: 0; clip-path: inset(0 0 100% 0); }
+  8% { opacity: 0.9; clip-path: inset(8% 0 76% 0); transform: translate(-7px, 0); }
+  20% { opacity: 0.55; clip-path: inset(68% 0 12% 0); transform: translate(5px, 1px); }
+  36% { opacity: 0; }
+  48% { opacity: 0.85; clip-path: inset(42% 0 43% 0); transform: translate(-5px, -1px); }
+  64% { opacity: 0.7; clip-path: inset(82% 0 5% 0); transform: translate(7px, 0); }
+  78% { opacity: 0; }
+  88% { opacity: 0.6; clip-path: inset(25% 0 62% 0); transform: translate(-3px, 0); }
+}
+@keyframes title-glitch-cyan {
+  0%, 100% { opacity: 0; clip-path: inset(100% 0 0 0); }
+  12% { opacity: 0.75; clip-path: inset(72% 0 9% 0); transform: translate(6px, -1px); }
+  28% { opacity: 0.5; clip-path: inset(18% 0 68% 0); transform: translate(-4px, 0); }
+  40% { opacity: 0; }
+  55% { opacity: 0.8; clip-path: inset(55% 0 27% 0); transform: translate(6px, 1px); }
+  70% { opacity: 0; }
+  84% { opacity: 0.65; clip-path: inset(6% 0 80% 0); transform: translate(4px, 0); }
+}
+@keyframes title-tv-flicker {
+  0%, 100% { filter: none; }
+  8% { filter: brightness(1.8) contrast(1.25); }
+  18% { filter: brightness(0.72); }
+  32% { filter: brightness(1.35); }
+  48% { filter: brightness(0.82); }
+  64% { filter: brightness(1.5) contrast(1.15); }
+  78% { filter: brightness(0.9); }
 }
 @keyframes glitch {
   0% {
@@ -912,7 +975,7 @@ footer {
   }
 }
 @media (max-width: 680px) {
-  .status {
+  .status:not(.language-toggle) {
     display: none;
   }
   .proj-grid {
@@ -945,8 +1008,8 @@ html {
 }
 #hero {
   width: 100%;
-  height: 610px;
-  min-height: 610px;
+  height: 520px;
+  min-height: 520px;
   margin-top: 66px;
   padding: 0;
   display: block;
@@ -962,7 +1025,7 @@ html {
 }
 .hero-frame {
   width: 1180px;
-  height: 610px;
+  height: 520px;
   margin: 0 auto;
   padding: 0;
   position: relative;
@@ -970,7 +1033,7 @@ html {
   grid-template-columns: 603px 446px;
   column-gap: 0;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
   background: linear-gradient(
     90deg,
@@ -985,6 +1048,22 @@ html {
     #101612 93%,
     #101110 100%
   );
+}
+.hero-frame::before {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 50%;
+  height: 78%;
+  z-index: 0;
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-12deg);
+  background-image: linear-gradient(rgba(124, 255, 196, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 255, 196, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse at center, #000 45%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 85%);
 }
 .hero-frame::after {
   content: "";
@@ -1005,10 +1084,12 @@ html {
 }
 .hero-copy {
   width: 603px;
+  margin-top: 48px;
 }
 .hero-image-area {
   width: 446px;
-  height: 480px;
+  height: 410px;
+  margin-top: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1024,10 +1105,10 @@ html {
 .hero-logo {
   display: block;
   width: 446px;
-  height: 480px;
+  height: 410px;
   max-width: none;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center bottom;
   position: relative;
   z-index: 1;
   background: transparent;
@@ -1050,29 +1131,25 @@ html {
 }
 .tv-glitch.glitching::before {
   color: #ff2d6b;
-  transform: translate(-4px, 1px);
   mix-blend-mode: screen;
-  opacity: 0.9;
+  animation: title-glitch-red 0.8s steps(1, end) both;
 }
 .tv-glitch.glitching::after {
   color: #2dfff0;
-  transform: translate(4px, -1px);
   mix-blend-mode: screen;
-  opacity: 0.9;
+  animation: title-glitch-cyan 0.8s steps(1, end) both;
 }
 .tv-glitch.glitching {
-  animation:
-    glitch 0.3s steps(2),
-    flicker 0.3s linear;
+  animation: title-tv-flicker 0.8s linear both;
 }
 @media (max-width: 1180px) {
   #hero {
     height: auto;
-    min-height: 610px;
+    min-height: 520px;
   }
   .hero-frame {
     width: 100%;
-    min-height: 610px;
+    min-height: 520px;
     padding: 0 30px;
     grid-template-columns: minmax(0, 603px) minmax(350px, 446px);
   }
@@ -1084,7 +1161,7 @@ html {
   }
   .hero-logo {
     width: 100%;
-    height: 480px;
+    height: 410px;
   }
 }
 @media (max-width: 980px) {
@@ -1101,10 +1178,16 @@ html {
     justify-content: center;
     gap: 40px;
   }
+  .hero-copy {
+    margin-top: 0;
+  }
   .hero-image-area {
     margin: 0;
     width: min(446px, 100%);
     flex: 0 0 480px;
+  }
+  .hero-logo {
+    height: 480px;
   }
 }
 @media (max-width: 680px) {
@@ -1136,7 +1219,7 @@ html {
     --hero-opacity: 1;
     --hero-scale: 1;
     height: calc(100svh - 66px);
-    min-height: 610px;
+    min-height: 520px;
     position: sticky;
     top: 66px;
     display: flex;
