@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=34" />
+    <link rel="stylesheet" href="style.css?v=54" />
     <noscript
       ><style>
         #boot {
@@ -31,8 +31,11 @@
     >
   </head>
   <body>
-    <div id="boot" aria-hidden="true">
+    <div id="boot" aria-label="Introdução do portfólio">
       <div id="bootGlitch"><div id="bootLines"></div></div>
+      <button id="skipIntro" class="skip-intro" type="button">
+        Pular introdução <span aria-hidden="true">→</span>
+      </button>
     </div>
     <canvas id="dust" aria-hidden="true"></canvas>
     <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
@@ -98,13 +101,6 @@
             </div>
           </div>
           <div class="hero-image-area">
-            <div class="hero-shapes" aria-hidden="true">
-              <span class="hero-shape shape-orbit"></span>
-              <span class="hero-shape shape-disc"></span>
-              <span class="hero-shape shape-square"></span>
-              <span class="hero-shape shape-dot shape-dot-a"></span>
-              <span class="hero-shape shape-dot shape-dot-b"></span>
-            </div>
             <video
               class="hero-logo"
               autoplay
@@ -432,6 +428,6 @@
         <div class="cmdk-output" id="cmdkOutput" aria-live="polite"></div>
       </div>
     </div>
-    <script src="script.js?v=31"></script>
+    <script src="script.js?v=35"></script>
   </body>
 </html>

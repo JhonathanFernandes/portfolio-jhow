@@ -25,6 +25,17 @@
   const boot = document.querySelector("#boot");
   const bootBox = document.querySelector("#bootLines");
   const bootGlitch = document.querySelector("#bootGlitch");
+  const skipIntro = document.querySelector("#skipIntro");
+  const bootTimers = new Set();
+  let bootFinished = false;
+  const scheduleBoot = (callback, delay) => {
+    const timer = setTimeout(() => {
+      bootTimers.delete(timer);
+      if (!bootFinished) callback();
+    }, delay);
+    bootTimers.add(timer);
+    return timer;
+  };
   const bootLines = [
     ["jhow@dev:~$ ./init.sh", ""],
     ["carregando domínio...............[ok]", "ok"],
@@ -56,20 +67,26 @@
       })
       .join("");
   };
-  const finishBoot = () => {
+  const finishBoot = (immediate = false) => {
+    if (bootFinished) return;
+    bootFinished = true;
+    bootTimers.forEach(clearTimeout);
+    bootTimers.clear();
     document.body.style.overflow = "";
+    boot.setAttribute("aria-hidden", "true");
     boot.classList.add("done");
-    setTimeout(
-      () => {
-        document.body.classList.remove("intro-pending");
-        document.body.classList.add("hero-ready");
-      },
-      reduce ? 0 : 320,
-    );
-    setTimeout(() => {
+    document.body.classList.remove("intro-pending");
+    document.body.classList.add("hero-ready");
+    if (immediate) {
       boot.style.display = "none";
-    }, 700);
+      return;
+    }
+    setTimeout(
+      () => { boot.style.display = "none"; },
+      700,
+    );
   };
+  skipIntro.addEventListener("click", () => finishBoot(true));
   if (reduce) {
     bootBox.innerHTML = bootLines
       .map(
@@ -77,7 +94,7 @@
           `<span class="boot-line ${cls}" style="--line-chars:${text.length}">${text}</span>`,
       )
       .join("");
-    setTimeout(finishBoot, 650);
+    scheduleBoot(finishBoot, 650);
   } else {
     document.body.style.overflow = "hidden";
     let line = 0,
@@ -86,19 +103,19 @@
     let glitchTimer;
     const glitchBoot = () => {
       blinkTitle(bootGlitch, 450);
-      glitchTimer = setTimeout(glitchBoot, 1600 + Math.random() * 1200);
+      glitchTimer = scheduleBoot(glitchBoot, 1600 + Math.random() * 1200);
     };
     glitchBoot();
     const typeBoot = () => {
       if (line >= bootLines.length) {
         clearTimeout(glitchTimer);
-        return setTimeout(finishBoot, 650);
+        return scheduleBoot(finishBoot, 650);
       }
       const [text] = bootLines[line];
       if (char < text.length) {
         char++;
         renderBoot(line, char);
-        setTimeout(typeBoot, 26 + Math.random() * 34);
+        scheduleBoot(typeBoot, 26 + Math.random() * 34);
       } else {
         line++;
         char = 0;
@@ -108,7 +125,7 @@
             bootLines.length - 1,
             bootLines[bootLines.length - 1][0].length,
           );
-        setTimeout(typeBoot, 260);
+        scheduleBoot(typeBoot, 260);
       }
     };
     typeBoot();
@@ -137,10 +154,7 @@
     particles = Array.from(
       { length: Math.min(105, Math.round(width / 13)) },
       () => ({
-        x:
-          Math.random() < 0.7
-            ? width * (0.18 + Math.random() * 0.64)
-            : Math.random() * width,
+        x: Math.random() * width,
         y: Math.random() * height,
         r: Math.random() * 2 + 0.45,
         speed: Math.random() * 0.32 + 0.07,
@@ -158,19 +172,15 @@
       p.x += Math.sin(performance.now() * 0.00055 + p.phase) * 0.08 * p.depth;
       if (p.y < -8) {
         p.y = height + 8;
-        p.x = width * (0.16 + Math.random() * 0.68);
+        p.x = Math.random() * width;
       }
       if (p.y > height + 8) {
         p.y = -8;
-        p.x = width * (0.16 + Math.random() * 0.68);
+        p.x = Math.random() * width;
       }
-      const center = Math.max(
-        0.25,
-        1 - Math.abs(p.x - width / 2) / (width * 0.7),
-      );
       const alpha = Math.min(
         0.9,
-        p.alpha * center * (0.32 + particleEnergy * 1.55),
+        p.alpha * (0.5 + particleEnergy * 1.55),
       );
       ctx.beginPath();
       ctx.fillStyle = `rgba(${p.color},${alpha})`;
@@ -683,13 +693,17 @@
         const rect = button.getBoundingClientRect();
         const x = event.clientX - rect.left - rect.width / 2;
         const y = event.clientY - rect.top - rect.height / 2;
-        button.style.transform = `translate(${x * 0.08}px, ${y * 0.14}px)`;
+        const isHeroButton = button.matches("#hero .btn");
+        const forceX = isHeroButton ? 0.15 : 0.08;
+        const forceY = isHeroButton ? 0.3 : 0.14;
+        button.style.transform = `translate(${x * forceX}px, ${y * forceY}px)`;
       });
       button.addEventListener("mouseleave", () => (button.style.transform = ""));
     }
     button.addEventListener("click", (event) => {
       const rect = button.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height) * 1.7;
+      const size = Math.max(rect.width, rect.height) *
+        (button.matches("#hero .btn") ? 1.6 : 1.7);
       const ripple = document.createElement("span");
       ripple.className = "ripple";
       ripple.style.width = ripple.style.height = `${size}px`;
