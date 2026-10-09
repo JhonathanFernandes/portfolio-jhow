@@ -12,6 +12,47 @@
     setTimeout(() => element.classList.remove("glitching"), ms);
   };
 
+  // Hero inspirado na referência: decripta as letras e finaliza com um glitch curto.
+  const scrambleHeroTitle = (element, duration = 800) => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ01#*";
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    let node;
+    while ((node = walker.nextNode())) nodes.push(node);
+
+    nodes.forEach((textNode) => {
+      const original = textNode.textContent;
+      const totalFrames = Math.round(duration / 30);
+      let frame = 0;
+      const timer = setInterval(() => {
+        frame += 1;
+        const revealCount = Math.floor((frame / totalFrames) * original.length);
+        textNode.textContent = [...original]
+          .map((character, index) =>
+            character === " " || index < revealCount
+              ? character
+              : chars[Math.floor(Math.random() * chars.length)],
+          )
+          .join("");
+
+        if (frame >= totalFrames) {
+          clearInterval(timer);
+          textNode.textContent = original;
+        }
+      }, 30);
+    });
+  };
+
+  let heroGlitchInterval;
+  const runHeroTitleEffect = () => {
+    const heroTitle = document.querySelector("#heroTitle");
+    if (!heroTitle || reduce) return;
+    scrambleHeroTitle(heroTitle, 800);
+    setTimeout(() => blinkTitle(heroTitle, 350), 850);
+    clearInterval(heroGlitchInterval);
+    heroGlitchInterval = setInterval(() => blinkTitle(heroTitle, 300), 9000);
+  };
+
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
   if (location.hash)
     history.replaceState(null, "", `${location.pathname}${location.search}`);
@@ -79,10 +120,14 @@
     document.body.classList.add("hero-ready");
     if (immediate) {
       boot.style.display = "none";
+      runHeroTitleEffect();
       return;
     }
     setTimeout(
-      () => { boot.style.display = "none"; },
+      () => {
+        boot.style.display = "none";
+        runHeroTitleEffect();
+      },
       700,
     );
   };
@@ -223,9 +268,9 @@
     sectionTitle.classList.add("tv-glitch");
     sectionTitle.dataset.text = sectionTitle.innerText;
   });
-  const glitchTitles = [title, ...sectionTitles];
   if (!reduce) {
-    setInterval(() => glitchTitles.forEach((heading) => blinkTitle(heading)), 4200);
+    // Os demais títulos mantêm o efeito de TV original.
+    setInterval(() => sectionTitles.forEach((heading) => blinkTitle(heading)), 4200);
     const titleObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
@@ -235,7 +280,8 @@
         }),
       { threshold: 0.55 },
     );
-    glitchTitles.forEach((glitchTitle) => titleObserver.observe(glitchTitle));
+    sectionTitles.forEach((sectionTitle) => titleObserver.observe(sectionTitle));
+
   }
 
   const root = document.documentElement;
@@ -292,15 +338,25 @@
 
   const navLinks = document.querySelector("#navLinks");
   const burger = document.querySelector("#burger");
-  burger.addEventListener("click", () => {
-    const open = navLinks.classList.toggle("open");
+  const setMobileMenu = (open) => {
+    navLinks.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", String(open));
+    burger.textContent = open ? "×" : "≡";
+    burger.setAttribute(
+      "aria-label",
+      currentLanguage === "en"
+        ? open ? "Close menu" : "Open menu"
+        : open ? "Fechar menu" : "Abrir menu",
+    );
+  };
+  burger.addEventListener("click", () => {
+    setMobileMenu(!navLinks.classList.contains("open"));
   });
   navLinks.addEventListener("click", (e) => {
-    if (e.target.matches("a")) {
-      navLinks.classList.remove("open");
-      burger.setAttribute("aria-expanded", "false");
-    }
+    if (e.target.matches("a")) setMobileMenu(false);
+  });
+  addEventListener("resize", () => {
+    if (innerWidth > 980) setMobileMenu(false);
   });
 
   const sections = [...document.querySelectorAll("section[id]")];
@@ -361,7 +417,7 @@
       );
       section.style.setProperty(
         "--reveal-opacity",
-        Math.max(0.08, progress).toFixed(4),
+        "1",
       );
       section.style.setProperty(
         "--reveal-lift",
@@ -377,17 +433,11 @@
       0,
       Math.min(1, (start - aboutRect.top) / (start - end)),
     );
-    const heroFadeProgress = Math.max(
-      0,
-      Math.min(1, (aboutProgress - 0.2) / 0.6),
-    );
-    const heroOpacity = 1 - heroFadeProgress;
-    heroSection.style.setProperty("--hero-opacity", heroOpacity.toFixed(4));
-    heroSection.style.setProperty(
-      "--hero-scale",
-      (1 - aboutProgress * 0.035).toFixed(4),
-    );
-    heroSection.style.pointerEvents = heroOpacity < 0.08 ? "none" : "";
+    // O hero permanece inteiro; a seção Sobre, em uma camada superior,
+    // cobre a home durante a rolagem sem aparecer através do avatar.
+    heroSection.style.setProperty("--hero-opacity", "1");
+    heroSection.style.setProperty("--hero-scale", "1");
+    heroSection.style.pointerEvents = aboutProgress > 0.92 ? "none" : "";
   };
   addEventListener("scroll", updateCinematicReveal, { passive: true });
   addEventListener("resize", updateCinematicReveal, { passive: true });
@@ -435,7 +485,7 @@
           .forEach((bar) => (bar.style.width = `${bar.dataset.w}%`));
         observer.unobserve(entry.target);
       }),
-    { threshold: 0.18 },
+    { threshold: 0.04, rootMargin: "0px 0px 14% 0px" },
   );
   document
     .querySelectorAll(".reveal,.stack-grid")
@@ -486,7 +536,7 @@
       };
       type();
     },
-    { threshold: 0.3 },
+    { threshold: 0.08, rootMargin: "0px 0px 12% 0px" },
   ).observe(term);
 
   const projects = [...document.querySelectorAll(".proj")];
@@ -545,10 +595,11 @@
     ".stat:nth-child(3) .k": "domain_layers",
     ".stat:nth-child(4) .k": "migrations_run",
     ".about-copy > .kicker": "/* who writes the code */",
-    "#sobre h2": "Back end is where<br>the rules live.",
-    ".about-copy .reveal > p:nth-child(1)": "I'm <strong>Jhonathan</strong>, a developer based in Curitiba, studying <em>Systems Analysis and Development</em> at UNINTER.",
-    ".about-copy .reveal > p:nth-child(2)": "My main project today is a <strong>multi-tenant medical SaaS</strong>: clinic management with tenant isolation, access control and a patient-flow microservice.",
-    ".about-copy .reveal > p:nth-child(3)": "I follow <em>Clean Architecture</em>: domain at the center, framework at the edge and tests in between.",
+    "#sobre h2": "It's in the code that things happen.",
+    ".about-copy .reveal > p:nth-child(1)": "I'm <strong>Jhonathan Fernandes</strong>, an aspiring developer and <em>Systems Analysis and Development</em> student based in Curitiba.",
+    ".about-copy .reveal > p:nth-child(2)": "I have focused my studies on <strong>software development</strong>, especially <em>website and landing-page design and development</em>, as well as code organization. In this part of the work, which users don't always see, I rediscover the <strong>freedom to create</strong> exactly as I want, and that's where I have concentrated my interest.",
+    ".about-copy .reveal > p:nth-child(3)": "I'm also an admirer of <em>cybersecurity</em> because, beyond knowing how to build, you need to know how to protect.",
+    ".about-copy .reveal > p:nth-child(4)": "And I'm addicted to coffee, haha.",
     "#projetos .head-row > div .kicker": "/* projects I've built */",
     "#projetos h2": "Where front end, back end<br>and systems meet.",
     "#projetos > .sec-in > .lead": "Each project below solves a real problem — architecture, data, integration or experience.",
@@ -624,7 +675,7 @@
       : "Portfólio de Jhonathan Fernandes — backend, APIs e sistemas.";
     document.title = language === "en" ? "JHOW.DEV — Back End & Systems" : "JHOW.DEV — Backend & Sistemas";
     document.querySelector("header nav").setAttribute("aria-label", language === "en" ? "Main navigation" : "Navegação principal");
-    document.querySelector("#burger").setAttribute("aria-label", language === "en" ? "Open menu" : "Abrir menu");
+    setMobileMenu(navLinks.classList.contains("open"));
     updateThemeButton();
     const langButton = document.querySelector("#langBtn");
     langButton.textContent = language === "en" ? "PT" : "EN";
