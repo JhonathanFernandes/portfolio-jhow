@@ -655,13 +655,13 @@
     ".hero-sub": "Interfaces, APIs and Libraries.<br><br>Designed through internships, college, courses and curiosity about the cyber world.",
     ".btn-solid": "View projects",
     ".btn-ghost": "&gt;_ OPEN RÉSUMÉ",
-    ".stat:nth-child(1) .k": "PROJECTS_BUILT",
-    ".stat:nth-child(1) .l": "APPLICATIONS DEVELOPED",
-    ".stat:nth-child(2) .k": "LIVE_APPLICATIONS",
+    ".stat:nth-child(1) .k": "PROJECTS DEVELOPED",
+    ".stat:nth-child(1) .l": "APPLICATIONS CREATED",
+    ".stat:nth-child(2) .k": "PUBLISHED APPLICATIONS",
     ".stat:nth-child(2) .l": "AVAILABLE ONLINE",
-    ".stat:nth-child(3) .k": "TECHNOLOGIES_USED",
+    ".stat:nth-child(3) .k": "TECHNOLOGIES USED",
     ".stat:nth-child(3) .l": "ACROSS PROJECTS",
-    ".stat:nth-child(4) .k": "ACTIVE_PROJECTS",
+    ".stat:nth-child(4) .k": "PROJECTS IN PROGRESS",
     ".stat:nth-child(4) .l": "CONTINUOUS IMPROVEMENT",
     ".about-copy > .kicker": "/* who writes the code */",
     "#sobre h2": "It's in the code that things happen.",
@@ -712,10 +712,11 @@
     ".tl-item:nth-child(5) .tl-what": "Building and evolving",
     ".tl-item:nth-child(5) > p:last-child": "I currently improve Bolão da Resenha, Conectando a Comunidade, the medical system and Motorista Copiloto, respecting each product's current stage.",
     "#contato > .sec-in > .kicker": "/* contact me */",
-    "#contato h2": "Shall we build<br>something together?",
+    "#contato h2": "Shall we build something together?",
     "#contato .contact-grid .lead": "Freelance work, collaboration or a back-end role — send me a message.",
     "label[for='f-nome']": "name",
     "label[for='f-mail']": "email",
+    "label[for='f-sub']": "subject",
     "label[for='f-msg']": "message",
     ".send": "Send message",
     "footer": "JHOW.DEV — Front end. Every day brings something new to learn."
@@ -729,6 +730,7 @@
   const placeholders = {
     "#f-nome": { pt: "Seu nome", en: "Your name" },
     "#f-mail": { pt: "voce@email.com", en: "you@email.com" },
+    "#f-sub": { pt: "Assunto", en: "Subject" },
     "#f-msg": { pt: "Conta o que você precisa...", en: "Tell me what you need..." }
   };
   const updateProjectCount = () => {
@@ -790,12 +792,12 @@
       !empty && !document.querySelector("#f-mail").checkValidity();
     document.querySelector("#formMsg").textContent = currentLanguage === "en"
       ? empty
-        ? "Fill in your name, email and message."
+        ? "Fill in your name, email, subject and message."
         : badMail
           ? "Enter a valid email address."
           : "The form is ready; a delivery service still needs to be connected."
       : empty
-        ? "Preencha nome, email e mensagem para enviar."
+        ? "Preencha nome, email, assunto e mensagem para enviar."
         : badMail
           ? "Informe um email válido."
           : "Formulário pronto; falta conectar um serviço de envio.";
