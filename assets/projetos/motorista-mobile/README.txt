@@ -1,3 +1,3 @@
 Adicione aqui exatamente dois arquivos:
-- tela-principal.webp
-- funcionalidade.webp
+- tela-principal.png
+- funcionalidade.png
