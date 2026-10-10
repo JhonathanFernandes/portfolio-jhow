@@ -55,14 +55,16 @@
   };
 
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  if (location.hash)
+  if (location.hash && !returnToProjects)
     history.replaceState(null, "", `${location.pathname}${location.search}`);
   const resetToHero = () => scrollTo({ top: 0, left: 0, behavior: "instant" });
-  resetToHero();
-  addEventListener("pageshow", () => {
+  if (!returnToProjects) {
     resetToHero();
-    requestAnimationFrame(resetToHero);
-  });
+    addEventListener("pageshow", () => {
+      resetToHero();
+      requestAnimationFrame(resetToHero);
+    });
+  }
 
   const boot = document.querySelector("#boot");
   const bootBox = document.querySelector("#bootLines");
@@ -141,7 +143,9 @@
     );
   };
   skipIntro.addEventListener("click", () => finishBoot(true));
-  if (reduce) {
+  if (returnToProjects) {
+    finishBoot(true);
+  } else if (reduce) {
     bootBox.innerHTML = bootLines
       .map(
         ([text, cls]) =>
