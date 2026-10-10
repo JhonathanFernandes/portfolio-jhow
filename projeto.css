@@ -127,7 +127,8 @@ a {
   text-transform: uppercase;
 }
 
-.project-status[data-status="Em produção"] {
+.project-status[data-status="Em produção"],
+.project-status[data-status="In production"] {
   color: #c9f36b;
   border-color: rgba(201, 243, 107, 0.32);
 }

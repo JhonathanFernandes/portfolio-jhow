@@ -5,7 +5,7 @@
    * Configure liveUrl e githubUrl somente quando os endereços forem públicos.
    * As duas imagens de cada projeto ficam nos caminhos informados em `images`.
    */
-  const projects = {
+  const projectsPt = {
     "bolao-da-resenha": {
       name: "Bolão da Resenha",
       category: "SaaS",
@@ -144,14 +144,182 @@
     },
   };
 
+  const projectsEn = {
+    "bolao-da-resenha": {
+      ...projectsPt["bolao-da-resenha"],
+      status: "Evolving",
+      summary: "Sports platform for organizing predictions, following results and checking standings.",
+      about: [
+        "Bolão da Resenha centralizes the experience of sports pool participants and organizers. Participants can submit predictions, check their matches and follow standings, while organizers manage rounds, games, users and payments through a dedicated dashboard.",
+        "The platform uses a multi-tenant SaaS architecture, serving different organizers with data, settings and access separated by organization. It also includes organizer registration, plan and subscription management, and Mercado Pago integration for PIX payments.",
+        "The project is functional and continues to evolve through a modular back-end refactor, interface improvements and an integrated landing page that presents the product.",
+      ],
+      features: [
+        "Sports pool, round and match management.",
+        "Prediction submission and consultation.",
+        "Results, standings and winner tracking.",
+        "PIX payments and confirmations processed through webhooks.",
+        "Administrative dashboard with indicators and reports.",
+        "Organization, plan and subscription management.",
+        "Responsive experience with PWA installation support.",
+      ],
+      technologies: {
+        "Front end and PWA": ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router", "Service Worker", "Web App Manifest"],
+        "Back end": ["Node.js", "Express", "TypeScript", "REST API", "Modular domain architecture"],
+        "Database": ["MySQL", "Prisma ORM", "Migrations"],
+        "Authentication and access": ["JWT", "Session renewal", "Permission control", "Name and phone access"],
+        "Payments": ["Mercado Pago", "PIX", "Webhooks"],
+        "SaaS architecture": ["Multi-tenant", "Monorepo", "Shared package", "Organization isolation", "Subscription management"],
+      },
+      images: [
+        { ...projectsPt["bolao-da-resenha"].images[0], alt: "Bolão da Resenha main screen", caption: "Bolão da Resenha home page and prize estimate." },
+        { ...projectsPt["bolao-da-resenha"].images[1], alt: "Bolão da Resenha feature", caption: "Participation flow and responsible gaming guidance." },
+      ],
+    },
+    "conectando-a-comunidade": {
+      ...projectsPt["conectando-a-comunidade"],
+      name: "Connecting the Community",
+      status: "In production",
+      summary: "Published web project developed to connect the community.",
+      about: [
+        "Connecting the Community is a published project built with React, TypeScript and PostgreSQL.",
+        "Its specific features and target audience still need to be documented. For that reason, this page does not attribute unconfirmed capabilities to the product.",
+      ],
+      technologies: {
+        "Front end": ["React", "TypeScript"],
+        "Database": ["PostgreSQL"],
+      },
+      images: [
+        { ...projectsPt["conectando-a-comunidade"].images[0], alt: "Connecting the Community main screen", caption: "Connecting the Community portal home page." },
+        { ...projectsPt["conectando-a-comunidade"].images[1], alt: "Connecting the Community feature", caption: "Local business search with map visualization." },
+      ],
+    },
+    "sistema-medico": {
+      ...projectsPt["sistema-medico"],
+      name: "Medical system",
+      status: "In development",
+      summary: "SaaS platform that centralizes clinic, patient, appointment and access management in one environment.",
+      about: [
+        "The Medical system was developed to centralize and optimize clinic management by bringing patient registration, appointment organization and access administration into a single platform.",
+        "Its multi-tenant architecture allows several clinics to use the same system securely while keeping each clinic's data and operations properly isolated. Access control restricts features and information according to each user's permissions.",
+        "Appointment workflows and integrations with the main application are concentrated in a dedicated service. This separation simplifies business-rule maintenance, module integration and platform evolution. The project is at an advanced development stage, with its main features implemented, but it is not presented as a finished product.",
+      ],
+      technologies: {
+        "Back end": ["Node.js", "TypeScript", "Prisma ORM"],
+        "Database": ["PostgreSQL"],
+        "Architecture": ["Multi-tenant", "Data isolation by clinic", "Permission-based access control"],
+        "Services": ["Appointment management", "Module integration", "Business-rule centralization"],
+      },
+      featuredTechnologies: ["Node.js", "TypeScript", "Prisma ORM", "PostgreSQL", "Multi-tenant", "Access control"],
+      images: [
+        { ...projectsPt["sistema-medico"].images[0], alt: "Medical system main screen", caption: "Main application screen." },
+        { ...projectsPt["sistema-medico"].images[1], alt: "Medical system feature", caption: "Screen showing a relevant project feature." },
+      ],
+    },
+    "motorista-mobile": {
+      ...projectsPt["motorista-mobile"],
+      name: "Driver Copilot",
+      status: "Evolving",
+      summary: "Financial and operational platform for app-based drivers, covering rides, costs, goals, work sessions and real profit.",
+      about: [
+        "Driver Copilot was created to help app-based drivers understand what actually remains after fuel, maintenance, vehicle wear, expenses and distance traveled. Instead of showing revenue alone, it tracks profit, operating costs, goals, work sessions and performance by period.",
+        "The platform brings together ride and expense records, vehicle management, refueling, maintenance, wallet controls, reports and performance comparisons. It also works as an installable PWA, supports offline operation with later synchronization, and is responsive on phones and laptops.",
+        "On Android, Radar identifies offers displayed by mobility apps using an Accessibility Service and OCR when required. It calculates earnings per kilometer and hour, compares the offer with the vehicle's actual cost, and presents the analysis in a floating window. The system only reports profitability; it never accepts or rejects rides automatically.",
+      ],
+      technologies: {
+        "Front end and PWA": ["HTML5", "CSS3", "Vanilla JavaScript", "Service Worker", "Web App Manifest"],
+        "Back end and data": ["Node.js", "Express.js", "PostgreSQL", "REST API", "SQL Migrations"],
+        "Android": ["Java", "Android WebView", "Accessibility Service", "ML Kit OCR", "Accessibility Overlay"],
+        "Integrations and infrastructure": ["OpenStreetMap Nominatim", "OSRM", "Google Maps", "Supabase Realtime", "Render"],
+        "Security": ["PBKDF2 with SHA-512", "Per-device sessions", "HttpOnly and Secure cookies", "Rate limiting"],
+      },
+      images: [
+        { ...projectsPt["motorista-mobile"].images[0], alt: "Driver Copilot main screen", caption: "Initial setup of the platforms used by the driver." },
+        { ...projectsPt["motorista-mobile"].images[1], alt: "Driver Copilot feature", caption: "Financial dashboard showing goals, work session and actual vehicle cost." },
+      ],
+    },
+  };
+
+  const currentLanguage = localStorage.getItem("language") === "en" ? "en" : "pt";
+  const projects = currentLanguage === "en" ? projectsEn : projectsPt;
+  document.documentElement.lang = currentLanguage === "en" ? "en" : "pt-BR";
+
+  const ui = currentLanguage === "en"
+    ? {
+        back: "← Back to projects",
+        project: "/* project */",
+        loading: "Loading project...",
+        techLabel: "Main technologies",
+        access: "Open project ↗",
+        github: "View code on GitHub ↗",
+        pendingUrl: "Application URL to be configured",
+        product: "/* product */",
+        about: "About the project",
+        featuresKicker: "/* features */",
+        features: "Main features",
+        implementation: "/* implementation */",
+        architecture: "Technologies and architecture",
+        interface: "/* interface */",
+        gallery: "Project gallery",
+        closeImage: "Close enlarged image",
+        pendingImage: "Image {number} pending",
+        enlarge: "Enlarge: {alt}",
+        pendingInfo: "Pending information",
+        pendingTech: "Technologies and architecture to be confirmed",
+        notFoundKicker: "/* 404 error */",
+        notFound: "Project not found.",
+      }
+    : {
+        back: "← Voltar aos projetos",
+        project: "/* projeto */",
+        loading: "Carregando projeto...",
+        techLabel: "Tecnologias principais",
+        access: "Acessar projeto ↗",
+        github: "Ver código no GitHub ↗",
+        pendingUrl: "URL da aplicação a configurar",
+        product: "/* produto */",
+        about: "Sobre o projeto",
+        featuresKicker: "/* funcionalidades */",
+        features: "Principais recursos",
+        implementation: "/* implementação */",
+        architecture: "Tecnologias e arquitetura",
+        interface: "/* interface */",
+        gallery: "Galeria do projeto",
+        closeImage: "Fechar imagem ampliada",
+        pendingImage: "Imagem {number} pendente",
+        enlarge: "Ampliar: {alt}",
+        pendingInfo: "Informações pendentes",
+        pendingTech: "Tecnologias e arquitetura a confirmar",
+        notFoundKicker: "/* erro 404 */",
+        notFound: "Projeto não encontrado.",
+      };
+
+  const backLinks = document.querySelectorAll(".back-link, .project-footer-back");
+  backLinks.forEach((link) => { link.textContent = ui.back; });
+  document.querySelector(".project-hero .project-kicker").textContent = ui.project;
+  document.querySelector("#projectTitle").textContent = ui.loading;
+  document.querySelector("#projectTechList").setAttribute("aria-label", ui.techLabel);
+  document.querySelector("#projectLiveLink").textContent = ui.access;
+  document.querySelector("#projectGithubLink").textContent = ui.github;
+  document.querySelector("#projectLinkPending").textContent = ui.pendingUrl;
+  document.querySelector(".project-about .project-kicker").textContent = ui.product;
+  document.querySelector(".project-about h2").textContent = ui.about;
+  document.querySelector(".project-features .project-kicker").textContent = ui.featuresKicker;
+  document.querySelector(".project-features h2").textContent = ui.features;
+  document.querySelector(".project-architecture .project-kicker").textContent = ui.implementation;
+  document.querySelector(".project-architecture h2").textContent = ui.architecture;
+  document.querySelector(".project-gallery-section .project-kicker").textContent = ui.interface;
+  document.querySelector(".project-gallery-section h2").textContent = ui.gallery;
+  document.querySelector("#lightboxClose").setAttribute("aria-label", ui.closeImage);
+
   const slug = new URLSearchParams(location.search).get("id");
   const project = projects[slug];
   const page = document.querySelector("#projectPage");
 
   if (!project) {
-    document.title = "Projeto não encontrado | JHOW.DEV";
+    document.title = `${ui.notFound} | JHOW.DEV`;
     page.className = "project-page project-error";
-    page.innerHTML = '<div><p class="project-kicker">/* erro 404 */</p><h1>Projeto não encontrado.</h1><p><a class="project-footer-back" href="index.html?from=project#projetos">← Voltar aos projetos</a></p></div>';
+    page.innerHTML = `<div><p class="project-kicker">${ui.notFoundKicker}</p><h1>${ui.notFound}</h1><p><a class="project-footer-back" href="index.html?from=project#projetos">${ui.back}</a></p></div>`;
     return;
   }
 
@@ -209,7 +377,7 @@
     });
   } else {
     const item = document.createElement("li");
-    item.textContent = "Tecnologias a confirmar";
+    item.textContent = ui.pendingTech;
     techList.appendChild(item);
   }
 
@@ -234,7 +402,7 @@
   const architecture = document.querySelector("#projectArchitecture");
   const architectureEntries = Object.entries(project.technologies);
   if (!architectureEntries.length) {
-    architecture.innerHTML = '<article class="architecture-card"><h3>Informações pendentes</h3><ul><li>Tecnologias e arquitetura a confirmar</li></ul></article>';
+    architecture.innerHTML = `<article class="architecture-card"><h3>${ui.pendingInfo}</h3><ul><li>${ui.pendingTech}</li></ul></article>`;
   } else {
     architectureEntries.forEach(([group, technologies]) => {
       const card = document.createElement("article");
@@ -260,7 +428,7 @@
     pendingLink.hidden = true;
   } else {
     liveLink.hidden = true;
-    pendingLink.textContent = project.liveNote || "URL da aplicação a configurar";
+    pendingLink.textContent = project.liveNote || ui.pendingUrl;
   }
   if (project.githubUrl) githubLink.href = project.githubUrl;
   else githubLink.hidden = true;
@@ -296,7 +464,7 @@
     media.className = "project-shot-media";
     const placeholder = document.createElement("div");
     placeholder.className = "shot-placeholder";
-    placeholder.innerHTML = `<strong>Imagem ${index + 1} pendente</strong><span>${image.src}</span>`;
+    placeholder.innerHTML = `<strong>${ui.pendingImage.replace("{number}", index + 1)}</strong><span>${image.src}</span>`;
     const screenshot = new Image();
     screenshot.alt = image.alt;
     screenshot.loading = "lazy";
@@ -305,7 +473,7 @@
       media.classList.add("has-image");
       media.tabIndex = 0;
       media.setAttribute("role", "button");
-      media.setAttribute("aria-label", `Ampliar: ${image.alt}`);
+      media.setAttribute("aria-label", ui.enlarge.replace("{alt}", image.alt));
     });
     screenshot.src = new URL(image.src, document.baseURI).href;
     media.appendChild(screenshot);
