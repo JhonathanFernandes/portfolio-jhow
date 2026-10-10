@@ -753,9 +753,9 @@
       document.querySelector(selector).placeholder = values[language];
     });
     document.querySelector('meta[name="description"]').content = language === "en"
-      ? "Jhonathan Fernandes' portfolio — back end, APIs and systems."
-      : "Portfólio de Jhonathan Fernandes — backend, APIs e sistemas.";
-    document.title = language === "en" ? "JHOW.DEV — Back End & Systems" : "JHOW.DEV — Backend & Sistemas";
+      ? "Jhonathan Fernandes' portfolio — aspiring Front-End developer with projects in HTML, CSS, JavaScript and React."
+      : "Portfólio de Jhonathan Fernandes — desenvolvedor Front-End em formação, com projetos em HTML, CSS, JavaScript e React.";
+    document.title = "JHOW.DEV — Front-End Developer";
     document.querySelector("header nav").setAttribute("aria-label", language === "en" ? "Main navigation" : "Navegação principal");
     setMobileMenu(navLinks.classList.contains("open"));
     updateThemeButton();
