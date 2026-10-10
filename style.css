@@ -1380,7 +1380,10 @@ html {
   min-height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  text-align: center;
   border: 0;
   background: var(--bg2);
 }
@@ -2029,8 +2032,13 @@ html {
   opacity: 0.46;
   mix-blend-mode: multiply;
 }
-[data-theme="light"] .stat,
 [data-theme="light"] .stats {
+  border: 1px solid rgba(14, 122, 82, 0.24);
+  background: rgba(14, 122, 82, 0.24);
+  color: #102218;
+  box-shadow: none;
+}
+[data-theme="light"] .stat {
   background: rgba(255, 255, 255, 0.88);
   color: #102218;
   box-shadow: none;
