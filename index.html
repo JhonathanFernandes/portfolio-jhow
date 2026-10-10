@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=73" />
+    <link rel="stylesheet" href="style.css?v=74" />
     <noscript
       ><style>
         #boot {
@@ -197,7 +197,10 @@
             </div>
             <span class="kicker" id="projCount">4 no total</span>
           </div>
-          <p class="lead reveal">Cada projeto abaixo resolve um problema real — de arquitetura, dados, integração ou experiência.</p>
+          <p class="lead reveal">
+            Projetos que saíram da ideia e ganharam forma em aplicações reais.
+            Cada um tem seu propósito, suas decisões técnicas e seus próprios desafios.
+          </p>
           <div class="filters reveal">
             <button class="fchip on" data-f="todos" aria-pressed="true">
               Todos</button
@@ -209,50 +212,80 @@
             </button>
           </div>
           <div class="proj-grid">
-            <article class="proj tilt reveal" data-tag="saas">
+            <article
+              class="proj tilt reveal"
+              data-tag="saas api"
+              data-href="projeto.html?id=sistema-medico"
+              tabindex="0"
+              role="link"
+              aria-label="Ver detalhes do projeto Sistema médico"
+            >
               <div class="p-top">
-                <h3>Clinic Platform</h3>
+                <h3>Sistema médico</h3>
                 <span class="p-tag">SaaS</span>
               </div>
               <p class="p-stack">Node.js · TypeScript · Prisma · PostgreSQL</p>
               <p class="p-desc">
-                Plataforma multi-tenant de gestão de clínicas com agenda,
-                pacientes, RBAC e isolamento.
+                Plataforma de gestão de clínicas com foco em organização de
+                atendimentos, pacientes e controle de acesso.
               </p>
-              <a class="p-link" href="#contato">Ver detalhes</a>
+              <a class="p-link" href="projeto.html?id=sistema-medico">Ver detalhes</a>
             </article>
-            <article class="proj tilt reveal" data-tag="api">
+            <article
+              class="proj tilt reveal"
+              data-tag="web"
+              data-href="projeto.html?id=conectando-a-comunidade"
+              tabindex="0"
+              role="link"
+              aria-label="Ver detalhes do projeto Conectando a Comunidade"
+            >
               <div class="p-top">
-                <h3>motor-atendimento</h3>
-                <span class="p-tag">API</span>
+                <h3>Conectando a Comunidade</h3>
+                <span class="p-tag">Web</span>
               </div>
-              <p class="p-stack">Node.js · Express · Prisma</p>
+              <p class="p-stack">React · TypeScript · PostgreSQL</p>
               <p class="p-desc">
-                Microsserviço de fluxo de atendimento integrado à plataforma
-                principal.
+                Projeto web publicado, desenvolvido para conectar a comunidade.
               </p>
-              <a class="p-link" href="#contato">Ver detalhes</a>
+              <a class="p-link" href="projeto.html?id=conectando-a-comunidade">Ver detalhes</a>
             </article>
-            <article class="proj tilt reveal" data-tag="web">
+            <article
+              class="proj tilt reveal"
+              data-tag="web"
+              data-href="projeto.html?id=bolao-da-resenha"
+              tabindex="0"
+              role="link"
+              aria-label="Ver detalhes do projeto Bolão da Resenha"
+            >
               <div class="p-top">
                 <h3>Bolão da Resenha</h3>
                 <span class="p-tag">Web</span>
               </div>
               <p class="p-stack">React · Vite · Node.js · MySQL</p>
               <p class="p-desc">
-                Palpites, apuração automática e ranking em tempo real.
+                Plataforma esportiva para organizar palpites, acompanhar
+                resultados e consultar classificações.
               </p>
-              <a class="p-link" href="#contato">Ver detalhes</a>
+              <a class="p-link" href="projeto.html?id=bolao-da-resenha">Ver detalhes</a>
             </article>
-            <article class="proj tilt reveal" data-tag="api">
+            <article
+              class="proj tilt reveal"
+              data-tag="mobile"
+              data-href="projeto.html?id=motorista-mobile"
+              tabindex="0"
+              role="link"
+              aria-label="Ver detalhes do projeto Motorista Mobile"
+            >
               <div class="p-top">
-                <h3>Seu próximo projeto</h3>
-                <span class="p-tag">API</span>
+                <h3>Motorista Mobile</h3>
+                <span class="p-tag">Mobile</span>
               </div>
+              <p class="p-stack">Tecnologias a confirmar</p>
               <p class="p-desc">
-                Espaço reservado para o próximo sistema colocado no ar.
+                Aplicativo mobile em desenvolvimento, atualmente próximo da
+                conclusão.
               </p>
-              <a class="p-link" href="#contato">Conversar</a>
+              <a class="p-link" href="projeto.html?id=motorista-mobile">Ver detalhes</a>
             </article>
           </div>
         </div>
@@ -436,6 +469,6 @@
         <div class="cmdk-output" id="cmdkOutput" aria-live="polite"></div>
       </div>
     </div>
-    <script src="script.js?v=45"></script>
+    <script src="script.js?v=46"></script>
   </body>
 </html>

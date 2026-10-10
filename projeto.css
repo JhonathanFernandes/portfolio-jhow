@@ -1,0 +1,381 @@
+:root {
+  --bg: #0d120c;
+  --panel: #101a13;
+  --panel-2: #142219;
+  --accent: #35e6a0;
+  --accent-2: #8ff0b6;
+  --text: #eef7f0;
+  --muted: #a8b9ad;
+  --line: rgba(124, 255, 196, 0.18);
+  --display: "Chakra Petch", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+  --max: 1180px;
+  --pad: clamp(20px, 5vw, 64px);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(53, 230, 160, 0.1), transparent 34rem),
+    var(--bg);
+  color: var(--text);
+  font: 15px/1.75 var(--mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 4px;
+}
+
+.project-nav {
+  width: min(100%, calc(var(--max) + 2 * var(--pad)));
+  min-height: 72px;
+  margin: 0 auto;
+  padding: 16px var(--pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-brand {
+  font: 700 20px var(--display);
+  text-decoration: none;
+}
+
+.project-brand span,
+.project-kicker,
+.project-category,
+.project-status {
+  color: var(--accent);
+}
+
+.back-link,
+.project-footer-back {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.back-link:hover,
+.project-footer-back:hover {
+  color: var(--accent-2);
+}
+
+.project-page {
+  width: min(100%, calc(var(--max) + 2 * var(--pad)));
+  margin: 0 auto;
+  padding: 0 var(--pad) 72px;
+}
+
+.project-hero,
+.project-section {
+  border-bottom: 1px solid var(--line);
+}
+
+.project-hero {
+  min-height: min(720px, calc(100vh - 72px));
+  padding: clamp(72px, 10vw, 132px) 0;
+  display: grid;
+  align-items: center;
+}
+
+.project-hero-copy {
+  max-width: 940px;
+}
+
+.project-kicker {
+  margin: 0 0 18px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.project-category,
+.project-status {
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  background: rgba(53, 230, 160, 0.07);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-status[data-status="Em produção"] {
+  color: #c9f36b;
+  border-color: rgba(201, 243, 107, 0.32);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--display);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  max-width: 980px;
+  font-size: clamp(48px, 9vw, 112px);
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+h2 {
+  margin-bottom: 34px;
+  font-size: clamp(32px, 5vw, 58px);
+  text-transform: uppercase;
+}
+
+h3 {
+  color: var(--accent-2);
+  font-size: 18px;
+}
+
+.project-summary {
+  max-width: 760px;
+  margin: 28px 0 0;
+  color: #d2ded5;
+  font-size: clamp(16px, 2vw, 20px);
+}
+
+.project-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-tech-list li {
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  color: #cbd8ce;
+  background: rgba(16, 26, 19, 0.82);
+  font-size: 11px;
+}
+
+.project-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 38px;
+}
+
+.project-button {
+  min-height: 46px;
+  padding: 12px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.project-button.primary {
+  background: var(--accent);
+  color: #07130c;
+}
+
+.project-button.secondary {
+  color: var(--accent-2);
+  background: transparent;
+}
+
+.project-button:hover {
+  transform: translateY(-2px);
+}
+
+.project-link-pending {
+  padding: 9px 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.project-section {
+  padding: clamp(72px, 9vw, 112px) 0;
+}
+
+.project-copy {
+  max-width: 800px;
+  color: #cbd8ce;
+  font-size: clamp(15px, 1.6vw, 17px);
+}
+
+.project-copy p {
+  margin: 0 0 20px;
+}
+
+.architecture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.architecture-card {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.architecture-card ul {
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  color: #cbd8ce;
+  font-size: 13px;
+  list-style: none;
+}
+
+.architecture-card li::before {
+  content: "▸ ";
+  color: var(--accent);
+}
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.project-shot {
+  min-width: 0;
+  margin: 0;
+}
+
+.project-shot-media {
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(124, 255, 196, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 255, 196, 0.045) 1px, transparent 1px),
+    var(--panel);
+  background-size: 30px 30px;
+}
+
+.project-shot img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.shot-placeholder {
+  max-width: 260px;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.shot-placeholder strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-2);
+  font: 600 16px var(--display);
+}
+
+.project-shot figcaption {
+  padding-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.project-footer-back {
+  display: inline-block;
+  margin-top: 36px;
+}
+
+.project-error {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .project-nav {
+    min-height: 64px;
+    gap: 12px;
+  }
+
+  .project-brand {
+    font-size: 18px;
+  }
+
+  .back-link {
+    font-size: 10px;
+  }
+
+  .project-hero {
+    min-height: auto;
+    padding: 72px 0;
+  }
+
+  h1 {
+    font-size: clamp(40px, 15vw, 66px);
+  }
+
+  .architecture-grid,
+  .project-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .project-button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .project-hero-copy,
+  .project-section > * {
+    animation: project-in 0.6s ease both;
+  }
+
+  @keyframes project-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+}

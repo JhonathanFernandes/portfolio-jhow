@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Detalhes de projeto do portfólio JHOW.DEV" />
+    <title>Projeto | JHOW.DEV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="projeto.css?v=1" />
+  </head>
+  <body>
+    <header class="project-nav">
+      <a class="project-brand" href="index.html">JHOW<span>.DEV</span></a>
+      <a class="back-link" href="index.html?from=project#projetos">← Voltar aos projetos</a>
+    </header>
+
+    <main id="projectPage" class="project-page" aria-live="polite">
+      <section class="project-hero">
+        <div class="project-hero-copy">
+          <p class="project-kicker">/* projeto */</p>
+          <div class="project-meta">
+            <span id="projectCategory" class="project-category"></span>
+            <span id="projectStatus" class="project-status"></span>
+          </div>
+          <h1 id="projectTitle">Carregando projeto...</h1>
+          <p id="projectSummary" class="project-summary"></p>
+          <ul id="projectTechList" class="project-tech-list" aria-label="Tecnologias principais"></ul>
+          <div class="project-actions">
+            <a id="projectLiveLink" class="project-button primary" target="_blank" rel="noopener noreferrer">Acessar projeto ↗</a>
+            <a id="projectGithubLink" class="project-button secondary" target="_blank" rel="noopener noreferrer">Ver código no GitHub ↗</a>
+            <span id="projectLinkPending" class="project-link-pending">URL da aplicação a configurar</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-section project-about">
+        <p class="project-kicker">/* produto */</p>
+        <h2>Sobre o projeto</h2>
+        <div id="projectAbout" class="project-copy"></div>
+      </section>
+
+      <section class="project-section project-architecture">
+        <p class="project-kicker">/* implementação */</p>
+        <h2>Tecnologias e arquitetura</h2>
+        <div id="projectArchitecture" class="architecture-grid"></div>
+      </section>
+
+      <section class="project-section project-gallery-section">
+        <p class="project-kicker">/* interface */</p>
+        <h2>Galeria do projeto</h2>
+        <div id="projectGallery" class="project-gallery"></div>
+      </section>
+
+      <a class="project-footer-back" href="index.html?from=project#projetos">← Voltar aos projetos</a>
+    </main>
+
+    <script src="projeto.js?v=1"></script>
+  </body>
+</html>

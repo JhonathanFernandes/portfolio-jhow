@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const returnToProjects = new URLSearchParams(location.search).get("from") === "project";
   let currentLanguage = localStorage.getItem("language") === "en" ? "en" : "pt";
   document.body.classList.add("intro-pending");
 
@@ -69,6 +70,14 @@
   const skipIntro = document.querySelector("#skipIntro");
   const bootTimers = new Set();
   let bootFinished = false;
+  const finishIntroNavigation = () => {
+    runHeroTitleEffect();
+    if (!returnToProjects) return;
+    requestAnimationFrame(() => {
+      document.querySelector("#projetos")?.scrollIntoView({ behavior: "instant" });
+      history.replaceState(null, "", `${location.pathname}#projetos`);
+    });
+  };
   const scheduleBoot = (callback, delay) => {
     const timer = setTimeout(() => {
       bootTimers.delete(timer);
@@ -120,13 +129,13 @@
     document.body.classList.add("hero-ready");
     if (immediate) {
       boot.style.display = "none";
-      runHeroTitleEffect();
+      finishIntroNavigation();
       return;
     }
     setTimeout(
       () => {
         boot.style.display = "none";
-        runHeroTitleEffect();
+        finishIntroNavigation();
       },
       700,
     );
@@ -554,9 +563,10 @@
       button.setAttribute("aria-pressed", "true");
       let shown = 0;
       projects.forEach((project) => {
+        const projectTags = project.dataset.tag.split(/\s+/);
         const visible =
           button.dataset.f === "todos" ||
-          project.dataset.tag === button.dataset.f;
+          projectTags.includes(button.dataset.f);
         project.classList.toggle("hidden", !visible);
         if (visible) shown++;
       });
@@ -565,6 +575,22 @@
         : shown === 1 ? "1 projeto" : `${shown} no total`;
     }),
   );
+
+  // O card inteiro abre o projeto; links internos continuam com apenas uma navegação.
+  projects.forEach((project) => {
+    const openProject = () => {
+      if (project.dataset.href) location.href = project.dataset.href;
+    };
+    project.addEventListener("click", (event) => {
+      if (event.target.closest("a, button")) return;
+      openProject();
+    });
+    project.addEventListener("keydown", (event) => {
+      if (event.target !== project || !["Enter", " "].includes(event.key)) return;
+      event.preventDefault();
+      openProject();
+    });
+  });
 
   if (!reduce && matchMedia("(hover:hover)").matches)
     document.querySelectorAll(".tilt").forEach((card) => {
@@ -608,16 +634,19 @@
     ".about-copy .reveal > p:nth-child(4)": "And I'm addicted to coffee, haha.",
     "#projetos .head-row > div .kicker": "/* projects I've built */",
     "#projetos h2": "Where front end, back end<br>and systems meet.",
-    "#projetos > .sec-in > .lead": "Each project below solves a real problem — architecture, data, integration or experience.",
+    "#projetos > .sec-in > .lead": "Projects that moved from an idea into real applications. Each one has its own purpose, technical decisions and challenges.",
     ".fchip[data-f='todos']": "All",
-    ".proj:nth-child(1) .p-desc": "Multi-tenant clinic management platform with scheduling, patients, RBAC and isolation.",
-    ".proj:nth-child(2) .p-desc": "Patient-flow microservice integrated with the main platform.",
-    ".proj:nth-child(3) h3": "Prediction League",
-    ".proj:nth-child(3) .p-desc": "Predictions, automatic scoring and real-time rankings.",
+    ".proj:nth-child(1) h3": "Medical system",
+    ".proj:nth-child(1) .p-desc": "Clinic management platform focused on organizing appointments, patients and access control.",
+    ".proj:nth-child(2) h3": "Connecting the Community",
+    ".proj:nth-child(2) .p-desc": "Published web project developed to connect the community.",
+    ".proj:nth-child(3) h3": "Bolão da Resenha",
+    ".proj:nth-child(3) .p-desc": "Sports platform for organizing predictions, following results and checking standings.",
     ".p-link": "View details",
-    ".proj:nth-child(4) h3": "Your next project",
-    ".proj:nth-child(4) .p-desc": "Space reserved for the next system launched into production.",
-    ".proj:nth-child(4) .p-link": "Let's talk",
+    ".proj:nth-child(4) h3": "Motorista Mobile",
+    ".proj:nth-child(4) .p-stack": "Technologies to be confirmed",
+    ".proj:nth-child(4) .p-desc": "Mobile application currently in development and nearing completion.",
+    ".proj:nth-child(4) .p-link": "View details",
     "#arquitetura > .sec-in > .kicker": "/* infrastructure and deployment */",
     "#arquitetura h2": "Going live is<br>part of the job.",
     "#arquitetura > .sec-in > .lead": "Versioned migrations, variables outside the codebase, accessible logs and possible rollbacks.",
