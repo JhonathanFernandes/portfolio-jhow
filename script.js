@@ -469,13 +469,16 @@
           if (el.dataset.done) return;
           el.dataset.done = "1";
           const end = +el.dataset.count,
-            suffix = el.dataset.suffix || "";
+            suffix = el.dataset.suffix || "",
+            pad = +(el.dataset.pad || 0);
           let start;
           const count = (time) => {
             if (start === undefined) start = time;
             const p = Math.min((time - start) / 1200, 1);
-            el.textContent =
-              Math.round(end * (1 - Math.pow(1 - p, 3))) + suffix;
+            const value = String(
+              Math.round(end * (1 - Math.pow(1 - p, 3))),
+            ).padStart(pad, "0");
+            el.textContent = value + suffix;
             if (p < 1) requestAnimationFrame(count);
           };
           requestAnimationFrame(count);
@@ -589,11 +592,14 @@
     ".hero-sub": "Interfaces, APIs and Libraries.<br><br>Designed through internships, college, courses and curiosity about the cyber world.",
     ".btn-solid": "View projects",
     ".btn-ghost": "&gt;_ OPEN RÉSUMÉ",
-    ".stat:nth-child(1) .k": "isolated_tenants",
-    ".stat:nth-child(2) .k": "projects_in_production",
-    ".stat:nth-child(2) .l": "running for real",
-    ".stat:nth-child(3) .k": "domain_layers",
-    ".stat:nth-child(4) .k": "migrations_run",
+    ".stat:nth-child(1) .k": "PROJECTS_BUILT",
+    ".stat:nth-child(1) .l": "APPLICATIONS DEVELOPED",
+    ".stat:nth-child(2) .k": "LIVE_APPLICATIONS",
+    ".stat:nth-child(2) .l": "AVAILABLE ONLINE",
+    ".stat:nth-child(3) .k": "TECHNOLOGIES_USED",
+    ".stat:nth-child(3) .l": "ACROSS PROJECTS",
+    ".stat:nth-child(4) .k": "ACTIVE_PROJECTS",
+    ".stat:nth-child(4) .l": "CONTINUOUS IMPROVEMENT",
     ".about-copy > .kicker": "/* who writes the code */",
     "#sobre h2": "It's in the code that things happen.",
     ".about-copy .reveal > p:nth-child(1)": "I'm <strong>Jhonathan Fernandes</strong>, an aspiring developer and <em>Systems Analysis and Development</em> student based in Curitiba.",
