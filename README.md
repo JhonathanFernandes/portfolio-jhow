@@ -22,7 +22,7 @@ A identidade visual combina uma interface escura, detalhes em verde, tipografia 
 
 O desenvolvimento deste portfólio teve como referência o trabalho de **Lohane Massao**, especialmente a linguagem visual e a organização da interface. A partir dessa inspiração, desenvolvi minha própria versão, adaptada ao meu conteúdo, aos meus projetos e às minhas escolhas de implementação.
 
-- **Portfólio de Lohane:** https://portfolio-beryl-xi-50.vercel.app/
+- **Portfólio de Lohane:** https://llohs.github.io/llohs-dev/#cv
 - **GitHub de Lohane:** https://github.com/lohjs-0
 
 Agradeço à Lohane pela referência e inspiração para o desenvolvimento deste projeto.
