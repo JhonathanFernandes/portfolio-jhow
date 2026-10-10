@@ -48,7 +48,7 @@
         "Front-end": ["React", "TypeScript"],
         "Banco de dados": ["PostgreSQL"],
       },
-      liveUrl: "",
+      liveUrl: "https://conectando-a-comunidade.vercel.app/",
       githubUrl: "",
       images: [
         {
