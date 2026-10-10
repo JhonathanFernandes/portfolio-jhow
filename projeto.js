@@ -248,12 +248,12 @@
     const placeholder = document.createElement("div");
     placeholder.className = "shot-placeholder";
     placeholder.innerHTML = `<strong>Imagem ${index + 1} pendente</strong><span>${image.src}</span>`;
-    media.appendChild(placeholder);
     const screenshot = new Image();
     screenshot.alt = image.alt;
     screenshot.loading = "lazy";
-    screenshot.addEventListener("load", () => media.replaceChildren(screenshot));
-    screenshot.src = image.src;
+    screenshot.addEventListener("error", () => media.replaceChildren(placeholder));
+    screenshot.src = new URL(image.src, document.baseURI).href;
+    media.appendChild(screenshot);
     const caption = document.createElement("figcaption");
     caption.textContent = image.caption;
     figure.append(media, caption);
