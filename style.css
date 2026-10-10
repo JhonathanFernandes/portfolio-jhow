@@ -1021,7 +1021,8 @@ footer {
   .burger {
     display: inline-grid;
     place-items: center;
-    position: static;
+    position: relative;
+    left: -7px;
     transform: none;
     margin: 0;
     padding: 0;
@@ -1029,7 +1030,10 @@ footer {
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    font-size: 34px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    font-size: 38px;
     font-weight: 500;
     line-height: 1;
   }
@@ -1848,19 +1852,30 @@ html {
   align-items: center;
   justify-content: center;
   font-family: Arial, "Helvetica Neue", sans-serif;
-  font-size: 24px;
+  font-size: 0;
   font-weight: 700;
   line-height: 1;
-  padding: 0 0 3px;
+  padding: 0;
   color: #ffd84d;
   border-color: rgba(255, 216, 77, 0.55);
   text-shadow: 0 0 12px rgba(255, 216, 77, 0.45);
 }
+#themeBtn::before {
+  content: "☀";
+  display: block;
+  font-size: 24px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
 [data-theme="light"] #themeBtn {
-  padding: 0 0 2px 1px;
+  padding: 0;
   color: #8ed4ff;
   border-color: rgba(82, 151, 201, 0.45);
   text-shadow: 0 0 12px rgba(82, 151, 201, 0.28);
+}
+[data-theme="light"] #themeBtn::before {
+  content: "☾";
+  transform: translate(1px, -1px);
 }
 .language-toggle {
   font-size: 13px;
@@ -1915,12 +1930,16 @@ html {
     min-width: 36px;
   }
   .burger {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    font-size: 32px;
+    left: -4px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    font-size: 36px;
   }
   #themeBtn {
+    font-size: 0;
+  }
+  #themeBtn::before {
     font-size: 22px;
   }
   .language-toggle {
