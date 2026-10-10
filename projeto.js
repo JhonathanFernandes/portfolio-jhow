@@ -93,26 +93,34 @@
       ],
     },
     "motorista-mobile": {
-      name: "Motorista Mobile",
+      name: "Motorista Copiloto",
       category: "Mobile",
-      status: "Em desenvolvimento",
-      summary: "Aplicativo mobile atualmente próximo da conclusão.",
+      status: "Em evolução",
+      summary: "Plataforma financeira e operacional para motoristas de aplicativo, com controle de corridas, custos, metas, jornadas e lucro real.",
       about: [
-        "Motorista Mobile é um aplicativo em desenvolvimento e está próximo da conclusão.",
-        "As funcionalidades, o público e a arquitetura ainda precisam ser documentados. A página permanece preparada para receber essas informações sem apresentar detalhes técnicos não confirmados.",
+        "O Motorista Copiloto foi criado para ajudar motoristas de aplicativo a entender quanto realmente sobra depois de considerar combustível, manutenção, desgaste do veículo, despesas e quilômetros percorridos. Em vez de mostrar apenas faturamento, ele acompanha lucro, custo operacional, metas, jornadas e desempenho por período.",
+        "A plataforma reúne registro de corridas e despesas, gestão de veículos, abastecimentos, manutenções, carteira, relatórios e comparações de desempenho. Também funciona como PWA instalável, possui suporte offline com sincronização posterior e foi projetada para uso responsivo no celular e no notebook.",
+        "No Android, o Radar identifica ofertas exibidas por aplicativos de mobilidade usando Accessibility Service e OCR quando necessário. Ele calcula valor por quilômetro e por hora, compara a oferta com o custo real do veículo e exibe a análise em uma janela flutuante. O sistema apenas informa a rentabilidade: nunca aceita ou recusa corridas automaticamente.",
       ],
-      technologies: {},
+      technologies: {
+        "Front-end e PWA": ["HTML5", "CSS3", "JavaScript Vanilla", "Service Worker", "Web App Manifest"],
+        "Back-end e dados": ["Node.js", "Express.js", "PostgreSQL", "API REST", "SQL Migrations"],
+        "Android": ["Java", "Android WebView", "Accessibility Service", "ML Kit OCR", "Accessibility Overlay"],
+        "Integrações e infraestrutura": ["OpenStreetMap Nominatim", "OSRM", "Google Maps", "Supabase Realtime", "Render"],
+        "Segurança": ["PBKDF2 com SHA-512", "Sessões por dispositivo", "Cookies HttpOnly e Secure", "Rate limiting"],
+      },
+      featuredTechnologies: ["Node.js", "Express.js", "PostgreSQL", "JavaScript", "PWA", "Java", "Android", "ML Kit OCR"],
       liveUrl: "https://controle-passe-uber.onrender.com/",
       githubUrl: "",
       images: [
         {
           src: "assets/projetos/motorista-mobile/tela-principal.webp",
-          alt: "Tela principal do Motorista Mobile",
+          alt: "Tela principal do Motorista Copiloto",
           caption: "Tela principal da aplicação.",
         },
         {
           src: "assets/projetos/motorista-mobile/funcionalidade.webp",
-          alt: "Funcionalidade do Motorista Mobile",
+          alt: "Funcionalidade do Motorista Copiloto",
           caption: "Tela de uma funcionalidade relevante do projeto.",
         },
       ],
@@ -172,7 +180,9 @@
     setInterval(pulseGlitch, 9000);
   }
 
-  const allTechnologies = [...new Set(Object.values(project.technologies).flat())];
+  const allTechnologies = project.featuredTechnologies || [
+    ...new Set(Object.values(project.technologies).flat()),
+  ];
   const techList = document.querySelector("#projectTechList");
   if (allTechnologies.length) {
     allTechnologies.forEach((technology) => {
