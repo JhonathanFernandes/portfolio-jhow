@@ -8,21 +8,32 @@
   const projects = {
     "bolao-da-resenha": {
       name: "Bolão da Resenha",
-      category: "Web",
+      category: "SaaS",
       status: "Em evolução",
       summary: "Plataforma esportiva para organizar palpites, acompanhar resultados e consultar classificações.",
       about: [
-        "O Bolão da Resenha transforma a organização de palpites esportivos em uma experiência centralizada, permitindo acompanhar resultados e classificações em uma única aplicação.",
-        "A aplicação está funcional e atualmente passa por refatoração, além de receber uma landing page. Novas funcionalidades não foram descritas aqui para evitar apresentar recursos ainda não confirmados.",
+        "O Bolão da Resenha centraliza a experiência de participantes e organizadores de bolões esportivos. Os participantes podem registrar palpites, consultar seus jogos e acompanhar classificações, enquanto os organizadores administram rodadas, partidas, usuários e pagamentos em um painel dedicado.",
+        "A plataforma possui arquitetura SaaS multi-tenant, permitindo atender diferentes organizadores com dados, configurações e acessos separados por organização. Também conta com cadastro de organizadores, gestão de planos e assinaturas e integração com o Mercado Pago para pagamentos via PIX.",
+        "O projeto está funcional e segue em evolução, com refatoração modular do back-end, aprimoramento da interface e uma landing page integrada para apresentar o produto.",
+      ],
+      features: [
+        "Gestão de bolões, rodadas e partidas.",
+        "Registro e consulta de palpites.",
+        "Acompanhamento de resultados, rankings e ganhadores.",
+        "Pagamentos via PIX e confirmações processadas por webhooks.",
+        "Painel administrativo com indicadores e relatórios.",
+        "Gestão de organizações, planos e assinaturas.",
+        "Experiência responsiva com instalação como PWA.",
       ],
       technologies: {
-        "Front-end e PWA": ["React", "Vite", "Service Worker", "Web App Manifest"],
-        "Back-end": ["Node.js", "API REST", "JWT"],
-        "Banco de dados": ["MySQL"],
-        "Autenticação": ["Firebase Authentication", "Login por telefone"],
-        "Pagamentos": ["Mercado Pago", "PIX"],
+        "Front-end e PWA": ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router", "Service Worker", "Web App Manifest"],
+        "Back-end": ["Node.js", "Express", "TypeScript", "API REST", "Arquitetura modular por domínio"],
+        "Banco de dados": ["MySQL", "Prisma ORM", "Migrations"],
+        "Autenticação e acesso": ["JWT", "Renovação de sessão", "Controle de permissões", "Acesso por nome e telefone"],
+        "Pagamentos": ["Mercado Pago", "PIX", "Webhooks"],
+        "Arquitetura SaaS": ["Multi-tenant", "Monorepo", "Pacote compartilhado", "Isolamento por organização", "Gestão de assinaturas"],
       },
-      featuredTechnologies: ["React", "Vite", "Node.js", "MySQL", "Firebase Authentication", "Mercado Pago", "PWA"],
+      featuredTechnologies: ["React", "TypeScript", "Vite", "Node.js", "Express", "Prisma ORM", "MySQL", "Mercado Pago", "PWA"],
       liveUrl: "https://www.bolaodaresenha.site/jhowtestenovo-9fc76d",
       githubUrl: "",
       images: [
@@ -70,26 +81,30 @@
       name: "Sistema médico",
       category: "SaaS",
       status: "Em desenvolvimento",
-      summary: "Plataforma de gestão de clínicas com foco em atendimentos, pacientes e controle de acesso.",
+      summary: "Plataforma SaaS para centralizar a gestão de clínicas, pacientes, atendimentos e acessos em um único ambiente.",
       about: [
-        "O sistema médico foi pensado para organizar a operação de clínicas, reunindo a gestão de pacientes, atendimentos e permissões de acesso.",
-        "A arquitetura utiliza isolamento por tenant e um serviço de atendimento que concentra a lógica dos fluxos e integrações da aplicação principal. O projeto está próximo da conclusão, mas ainda não é apresentado como produto finalizado.",
+        "O Sistema médico foi desenvolvido para centralizar e otimizar a gestão de clínicas, reunindo cadastro de pacientes, organização dos atendimentos e administração de acessos em uma única plataforma.",
+        "A arquitetura multi-tenant permite que várias clínicas utilizem o mesmo sistema com segurança, mantendo dados e operações devidamente isolados. O controle de acesso restringe funcionalidades e informações conforme as permissões de cada usuário.",
+        "Os fluxos de atendimento e as integrações com a aplicação principal ficam concentrados em um serviço dedicado. Essa separação facilita a manutenção das regras de negócio e a evolução dos módulos. O projeto está em fase avançada de desenvolvimento, com as principais funcionalidades implementadas, mas ainda não é apresentado como produto finalizado.",
       ],
       technologies: {
-        "Back-end": ["Node.js", "TypeScript", "Prisma"],
+        "Back-end": ["Node.js", "TypeScript", "Prisma ORM"],
         "Banco de dados": ["PostgreSQL"],
-        "Arquitetura": ["Multi-tenant", "Controle de acesso", "Serviço de atendimento"],
+        "Arquitetura": ["Multi-tenant", "Isolamento de dados por clínica", "Controle de acesso por permissões"],
+        "Serviços": ["Gerenciamento de atendimentos", "Integração entre módulos", "Centralização das regras de negócio"],
       },
+      featuredTechnologies: ["Node.js", "TypeScript", "Prisma ORM", "PostgreSQL", "Multi-tenant", "Controle de acesso"],
       liveUrl: "",
+      liveNote: "Projeto ainda não publicado ou com acesso público indisponível",
       githubUrl: "",
       images: [
         {
-          src: "assets/projetos/sistema-medico/tela-principal.webp",
+          src: "assets/medico.png?v=1",
           alt: "Tela principal do sistema médico",
           caption: "Tela principal da aplicação.",
         },
         {
-          src: "assets/projetos/sistema-medico/funcionalidade.webp",
+          src: "assets/medico2.png?v=1",
           alt: "Funcionalidade do sistema médico",
           caption: "Tela de uma funcionalidade relevante do projeto.",
         },
@@ -206,6 +221,17 @@
     about.appendChild(element);
   });
 
+  const featuresSection = document.querySelector("#projectFeaturesSection");
+  const featuresList = document.querySelector("#projectFeatures");
+  if (project.features?.length) {
+    featuresSection.hidden = false;
+    project.features.forEach((feature) => {
+      const item = document.createElement("li");
+      item.textContent = feature;
+      featuresList.appendChild(item);
+    });
+  }
+
   const architecture = document.querySelector("#projectArchitecture");
   const architectureEntries = Object.entries(project.technologies);
   if (!architectureEntries.length) {
@@ -235,11 +261,35 @@
     pendingLink.hidden = true;
   } else {
     liveLink.hidden = true;
+    pendingLink.textContent = project.liveNote || "URL da aplicação a configurar";
   }
   if (project.githubUrl) githubLink.href = project.githubUrl;
   else githubLink.hidden = true;
 
   const gallery = document.querySelector("#projectGallery");
+  const lightbox = document.querySelector("#imageLightbox");
+  const lightboxImage = document.querySelector("#lightboxImage");
+  const lightboxCaption = document.querySelector("#lightboxCaption");
+  const lightboxClose = document.querySelector("#lightboxClose");
+  const openLightbox = (image) => {
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
+    lightboxCaption.textContent = image.caption;
+    lightbox.showModal();
+  };
+
+  lightboxClose.addEventListener("click", () => lightbox.close());
+  lightboxImage.addEventListener("click", () => lightbox.close());
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox || event.target.classList.contains("lightbox-content")) {
+      lightbox.close();
+    }
+  });
+  lightbox.addEventListener("close", () => {
+    lightboxImage.removeAttribute("src");
+    lightboxImage.alt = "";
+  });
+
   project.images.forEach((image, index) => {
     const figure = document.createElement("figure");
     figure.className = "project-shot";
@@ -252,8 +302,22 @@
     screenshot.alt = image.alt;
     screenshot.loading = "lazy";
     screenshot.addEventListener("error", () => media.replaceChildren(placeholder));
+    screenshot.addEventListener("load", () => {
+      media.classList.add("has-image");
+      media.tabIndex = 0;
+      media.setAttribute("role", "button");
+      media.setAttribute("aria-label", `Ampliar: ${image.alt}`);
+    });
     screenshot.src = new URL(image.src, document.baseURI).href;
     media.appendChild(screenshot);
+    media.addEventListener("click", () => {
+      if (media.classList.contains("has-image")) openLightbox(image);
+    });
+    media.addEventListener("keydown", (event) => {
+      if (!["Enter", " "].includes(event.key) || !media.classList.contains("has-image")) return;
+      event.preventDefault();
+      openLightbox(image);
+    });
     const caption = document.createElement("figcaption");
     caption.textContent = image.caption;
     figure.append(media, caption);

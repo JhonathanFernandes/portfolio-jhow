@@ -1,5 +1,14 @@
 (() => {
   "use strict";
+
+  console.log(
+    "%cJHOW.DEV%c\nOlá, dev curioso(a). O código também faz parte da experiência.\n\n%cJhonathan Fernandes%c\nContato: jhonathanads25@gmail.com\nCódigo: https://github.com/JhonathanFernandes/portfolio-jhow",
+    "display:inline-block;padding:8px 12px;background:#35e6a0;color:#05100a;font:700 18px 'Courier New',monospace;border-radius:4px",
+    "color:#94a89c;font:13px/1.7 'Courier New',monospace",
+    "color:#7cffc4;font:700 14px 'Courier New',monospace",
+    "color:#eef7f0;font:12px/1.7 'Courier New',monospace",
+  );
+
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const returnToProjects = new URLSearchParams(location.search).get("from") === "project";
   let currentLanguage = localStorage.getItem("language") === "en" ? "en" : "pt";
@@ -509,12 +518,14 @@
 
   const term = document.querySelector("#termBody");
   const commands = [
-    ["p", "jhow@infra:~$ ", "docker compose up -d"],
-    ["o", "", "api ✓   postgres ✓   redis ✓"],
+    ["p", "jhow@infra:~$ ", "git diff -- migrations/"],
+    ["o", "", { pt: "# revisar mudanças antes da publicação", en: "# review changes before deployment" }],
+    ["p", "jhow@infra:~$ ", "npm test"],
+    ["o", "", { pt: "# validar o comportamento da aplicação", en: "# validate application behavior" }],
     ["p", "jhow@infra:~$ ", "npx prisma migrate deploy"],
-    ["o", "", { pt: "3 migrations aplicadas · schema em dia", en: "3 migrations applied · schema up to date" }],
-    ["p", "jhow@infra:~$ ", "railway logs --tail"],
-    ["o", "", { pt: "[api] listening on :3000 · tenant resolver ativo", en: "[api] listening on :3000 · tenant resolver active" }],
+    ["o", "", { pt: "# aplicar migrations versionadas no ambiente", en: "# apply versioned migrations to the environment" }],
+    ["p", "jhow@infra:~$ ", "render logs --tail 20"],
+    ["o", "", { pt: "# consultar sinais para diagnóstico", en: "# inspect diagnostic signals" }],
     ["p", "jhow@infra:~$ ", ""],
   ];
   let terminalStarted = false;
@@ -675,23 +686,31 @@
     ".proj:nth-child(4) .p-link": "View details",
     "#arquitetura > .sec-in > .kicker": "/* infrastructure and deployment */",
     "#arquitetura h2": "Going live is<br>part of the job.",
-    "#arquitetura > .sec-in > .lead": "Versioned migrations, variables outside the codebase, accessible logs and possible rollbacks.",
+    "#arquitetura > .sec-in > .lead": "I version database changes, keep configuration separate from code, and organize deployment so each environment is reproducible, diagnosable through logs, and safer to maintain.",
     "#arquitetura .side-block:nth-child(1) .side-t": "what I handle",
     "#arquitetura .side-block:nth-child(2) .side-t": "principle I follow",
-    "#arquitetura .side-block:nth-child(2) > p:last-child": "The database is the source of truth, the schema is code, and every environment starts from scratch with one command.",
-    "#arquitetura .chip:last-child": "Basic CI",
+    "#arquitetura .side-block:nth-child(2) > p:last-child": "Working code is only the beginning: an application must support environment-specific configuration, repeat its deployment process, expose diagnostic signals, and remain secure and sustainable as it evolves.",
+    "#arquitetura .chip:nth-child(1)": "Prisma / SQL Migrations",
+    "#arquitetura .chip:nth-child(2)": "JWT / Permissions",
+    "#arquitetura .chip:nth-child(3)": "PostgreSQL / MySQL",
+    "#arquitetura .chip:nth-child(4)": "Render / Vercel Deploy",
     "#stack > .sec-in > .kicker": "/* everyday tools */",
     "#stack h2": "The stack behind<br>the projects.",
     ".skills > .lead": "Self-assessed proficiency level.",
     "#trajetoria > .sec-in > .kicker": "/* how I got here */",
     "#trajetoria h2": "Journey.",
-    ".tl-item:nth-child(1) .tl-what": "First production systems",
-    ".tl-item:nth-child(1) > p:last-child": "Authentication, relational databases and deployment for real users.",
-    ".tl-item:nth-child(2) .tl-what": "Architecture and discipline",
-    ".tl-item:nth-child(2) > p:last-child": "Isolated use cases, repositories as contracts and Prisma as an infrastructure detail.",
-    ".tl-item:nth-child(3) .tl-when": "2026 — now",
-    ".tl-item:nth-child(3) .tl-what": "Multi-tenant medical SaaS",
-    ".tl-item:nth-child(3) > p:last-child": "MVP with domain modeling, tenant isolation, RBAC and a microservice.",
+    ".tl-item:nth-child(1) .tl-what": "Experience beyond code",
+    ".tl-item:nth-child(1) > p:last-child": "My journey began outside technology, with experience in operations, management, process organization and team leadership.",
+    ".tl-item:nth-child(2) .tl-when": "In progress",
+    ".tl-item:nth-child(2) .tl-what": "Starting in technology",
+    ".tl-item:nth-child(2) > p:last-child": "I started a Systems Analysis and Development degree at UNINTER and began deepening my knowledge of programming and web development. Expected graduation: July 2027.",
+    ".tl-item:nth-child(3) .tl-what": "Learning through practice",
+    ".tl-item:nth-child(3) > p:last-child": "I complemented college with courses in programming, HTML and CSS, logic, Git and GitHub, MySQL and Network Defense.",
+    ".tl-item:nth-child(4) .tl-what": "From study to application",
+    ".tl-item:nth-child(4) > p:last-child": "I turned what I learned into personal projects, building interfaces, APIs, authentication, data persistence and integrations.",
+    ".tl-item:nth-child(5) .tl-when": "2026 — now",
+    ".tl-item:nth-child(5) .tl-what": "Building and evolving",
+    ".tl-item:nth-child(5) > p:last-child": "I currently improve Bolão da Resenha, Conectando a Comunidade, the medical system and Motorista Copiloto, respecting each product's current stage.",
     "#contato > .sec-in > .kicker": "/* contact me */",
     "#contato h2": "Shall we build<br>something together?",
     "#contato .contact-grid .lead": "Freelance work, collaboration or a back-end role — send me a message.",
