@@ -27,12 +27,12 @@
       githubUrl: "",
       images: [
         {
-          src: "assets/projetos/bolao-da-resenha/tela-principal.png",
+          src: "assets/projetos/bolao-da-resenha/tela-principal.png?v=2",
           alt: "Tela principal do Bolão da Resenha",
           caption: "Página inicial do Bolão da Resenha e estimativa de premiação.",
         },
         {
-          src: "assets/projetos/bolao-da-resenha/funcionalidade.png",
+          src: "assets/projetos/bolao-da-resenha/funcionalidade.png?v=2",
           alt: "Funcionalidade do Bolão da Resenha",
           caption: "Fluxo de participação e orientações de jogo responsável.",
         },
@@ -55,12 +55,12 @@
       githubUrl: "",
       images: [
         {
-          src: "assets/projetos/conectando-a-comunidade/tela-principal.png",
+          src: "assets/projetos/conectando-a-comunidade/tela-principal.png?v=2",
           alt: "Tela principal do Conectando a Comunidade",
           caption: "Página inicial do portal Conectando a Comunidade.",
         },
         {
-          src: "assets/projetos/conectando-a-comunidade/funcionalidade.png",
+          src: "assets/projetos/conectando-a-comunidade/funcionalidade.png?v=2",
           alt: "Funcionalidade do Conectando a Comunidade",
           caption: "Busca de comércios locais com visualização no mapa.",
         },
@@ -117,12 +117,12 @@
       githubUrl: "",
       images: [
         {
-          src: "assets/projetos/motorista-mobile/tela-principal.png",
+          src: "assets/projetos/motorista-mobile/tela-principal.png?v=2",
           alt: "Tela principal do Motorista Copiloto",
           caption: "Cadastro inicial das plataformas utilizadas pelo motorista.",
         },
         {
-          src: "assets/projetos/motorista-mobile/funcionalidade.png",
+          src: "assets/projetos/motorista-mobile/funcionalidade.png?v=2",
           alt: "Funcionalidade do Motorista Copiloto",
           caption: "Dashboard financeiro com meta, jornada e custo real do veículo.",
         },
