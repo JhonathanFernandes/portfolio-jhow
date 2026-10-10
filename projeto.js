@@ -131,12 +131,46 @@
   }
 
   document.title = `${project.name} | JHOW.DEV`;
-  document.querySelector("#projectTitle").textContent = project.name;
+  const projectTitle = document.querySelector("#projectTitle");
+  projectTitle.textContent = project.name;
+  projectTitle.dataset.text = project.name;
   document.querySelector("#projectCategory").textContent = project.category;
   const status = document.querySelector("#projectStatus");
   status.textContent = project.status;
   status.dataset.status = project.status;
   document.querySelector("#projectSummary").textContent = project.summary;
+
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const originalTitle = project.name;
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ01#*";
+    const duration = 800;
+    const totalFrames = Math.round(duration / 30);
+    let frame = 0;
+    const scramble = setInterval(() => {
+      frame += 1;
+      const revealed = Math.floor((frame / totalFrames) * originalTitle.length);
+      projectTitle.textContent = [...originalTitle]
+        .map((character, index) =>
+          character === " " || index < revealed
+            ? character
+            : characters[Math.floor(Math.random() * characters.length)],
+        )
+        .join("");
+      if (frame >= totalFrames) {
+        clearInterval(scramble);
+        projectTitle.textContent = originalTitle;
+      }
+    }, 30);
+
+    const pulseGlitch = () => {
+      projectTitle.classList.remove("glitching");
+      void projectTitle.offsetWidth;
+      projectTitle.classList.add("glitching");
+      setTimeout(() => projectTitle.classList.remove("glitching"), 350);
+    };
+    setTimeout(pulseGlitch, 850);
+    setInterval(pulseGlitch, 9000);
+  }
 
   const allTechnologies = [...new Set(Object.values(project.technologies).flat())];
   const techList = document.querySelector("#projectTechList");

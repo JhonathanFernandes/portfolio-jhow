@@ -92,8 +92,8 @@ a {
 }
 
 .project-hero {
-  min-height: min(720px, calc(100vh - 72px));
-  padding: clamp(72px, 10vw, 132px) 0;
+  min-height: auto;
+  padding: clamp(64px, 7vw, 88px) 0 clamp(52px, 6vw, 72px);
   display: grid;
   align-items: center;
 }
@@ -146,6 +146,46 @@ h1 {
   font-size: clamp(48px, 9vw, 112px);
   text-transform: uppercase;
   overflow-wrap: anywhere;
+}
+
+#projectTitle {
+  position: relative;
+}
+
+#projectTitle.glitching::before,
+#projectTitle.glitching::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: inherit;
+  pointer-events: none;
+  white-space: pre-line;
+}
+
+#projectTitle.glitching::before {
+  color: #ff3b3b;
+  animation: project-glitch-red 0.35s steps(2, jump-none) both;
+}
+
+#projectTitle.glitching::after {
+  color: #12e0ff;
+  animation: project-glitch-cyan 0.35s steps(2, jump-none) both;
+}
+
+@keyframes project-glitch-red {
+  0% { clip-path: inset(10% 0 70% 0); transform: translate(-3px, 0); }
+  30% { clip-path: inset(60% 0 5% 0); transform: translate(2px, 0); }
+  60% { clip-path: inset(25% 0 40% 0); transform: translate(-2px, 0); }
+  100% { clip-path: inset(0); transform: translate(0); opacity: 0; }
+}
+
+@keyframes project-glitch-cyan {
+  0% { clip-path: inset(70% 0 5% 0); transform: translate(3px, 0); }
+  30% { clip-path: inset(5% 0 65% 0); transform: translate(-2px, 0); }
+  60% { clip-path: inset(45% 0 20% 0); transform: translate(2px, 0); }
+  100% { clip-path: inset(0); transform: translate(0); opacity: 0; }
 }
 
 h2 {
@@ -228,7 +268,7 @@ h3 {
 }
 
 .project-section {
-  padding: clamp(72px, 9vw, 112px) 0;
+  padding: clamp(52px, 6vw, 76px) 0;
 }
 
 .project-copy {
@@ -349,7 +389,11 @@ h3 {
 
   .project-hero {
     min-height: auto;
-    padding: 72px 0;
+    padding: 52px 0 44px;
+  }
+
+  .project-section {
+    padding: 44px 0;
   }
 
   h1 {
@@ -377,5 +421,12 @@ h3 {
       opacity: 0;
       transform: translateY(16px);
     }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projectTitle::before,
+  #projectTitle::after {
+    display: none;
   }
 }
