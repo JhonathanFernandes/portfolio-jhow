@@ -596,21 +596,43 @@
     });
   });
 
-  if (!reduce && matchMedia("(hover:hover)").matches)
+  if (!reduce) {
+    const hasHover = matchMedia("(hover:hover)").matches;
     document.querySelectorAll(".tilt").forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
+      const moveCard = (clientX, clientY, maxTilt = 10) => {
         const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width;
-        const py = (e.clientY - r.top) / r.height;
-        const maxTilt = 10;
+        const px = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+        const py = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
         const ry = (px - 0.5) * maxTilt * 2;
         const rx = (0.5 - py) * maxTilt * 2;
         card.style.setProperty("--mx", `${px * 100}%`);
         card.style.setProperty("--my", `${py * 100}%`);
         card.style.transform = `perspective(900px) translateY(-9px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px) scale(1.035)`;
-      });
-      card.addEventListener("mouseleave", () => (card.style.transform = ""));
+      };
+      const resetCard = () => {
+        card.classList.remove("touch-active");
+        card.style.transform = "";
+      };
+
+      if (hasHover) {
+        card.addEventListener("mousemove", (e) => {
+          moveCard(e.clientX, e.clientY);
+        });
+        card.addEventListener("mouseleave", resetCard);
+      } else {
+        const moveFromTouch = (event) => {
+          const touch = event.touches[0];
+          if (!touch) return;
+          card.classList.add("touch-active");
+          moveCard(touch.clientX, touch.clientY, 6);
+        };
+        card.addEventListener("touchstart", moveFromTouch, { passive: true });
+        card.addEventListener("touchmove", moveFromTouch, { passive: true });
+        card.addEventListener("touchend", resetCard, { passive: true });
+        card.addEventListener("touchcancel", resetCard, { passive: true });
+      }
     });
+  }
 
   const englishContent = {
     ".nav-links li:nth-child(1) a": "About",
