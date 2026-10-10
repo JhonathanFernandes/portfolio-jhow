@@ -94,17 +94,16 @@
         "Serviços": ["Gerenciamento de atendimentos", "Integração entre módulos", "Centralização das regras de negócio"],
       },
       featuredTechnologies: ["Node.js", "TypeScript", "Prisma ORM", "PostgreSQL", "Multi-tenant", "Controle de acesso"],
-      liveUrl: "",
-      liveNote: "Projeto ainda não publicado ou com acesso público indisponível",
+      liveUrl: "https://frontend-iota-beryl-76.vercel.app/",
       githubUrl: "",
       images: [
         {
-          src: "assets/medico.png?v=1",
+          src: "assets/medico.png?v=2",
           alt: "Tela principal do sistema médico",
           caption: "Tela principal da aplicação.",
         },
         {
-          src: "assets/medico2.png?v=1",
+          src: "assets/medico2.png?v=2",
           alt: "Funcionalidade do sistema médico",
           caption: "Tela de uma funcionalidade relevante do projeto.",
         },
