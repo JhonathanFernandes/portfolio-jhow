@@ -1021,11 +1021,8 @@ footer {
   .burger {
     display: inline-grid;
     place-items: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 2;
-    transform: translate(-50%, -50%);
+    position: static;
+    transform: none;
     margin: 0;
     padding: 0;
     background: transparent;
@@ -1037,9 +1034,14 @@ footer {
     line-height: 1;
   }
   .burger:hover {
-    transform: translate(-50%, -50%);
+    transform: none;
     border-color: transparent;
     box-shadow: none;
+  }
+  .burger[aria-expanded="false"],
+  .burger[aria-expanded="false"]:hover {
+    font-weight: 400;
+    transform: scaleX(1.28) scaleY(0.76);
   }
 }
 @media (max-width: 680px) {
@@ -1842,15 +1844,20 @@ html {
   place-items: center;
 }
 #themeBtn {
-  font-family: var(--mono);
-  font-size: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-size: 24px;
   font-weight: 700;
   line-height: 1;
+  padding: 0 0 3px;
   color: #ffd84d;
   border-color: rgba(255, 216, 77, 0.55);
   text-shadow: 0 0 12px rgba(255, 216, 77, 0.45);
 }
 [data-theme="light"] #themeBtn {
+  padding: 0 0 2px 1px;
   color: #8ed4ff;
   border-color: rgba(82, 151, 201, 0.45);
   text-shadow: 0 0 12px rgba(82, 151, 201, 0.28);
@@ -1908,9 +1915,9 @@ html {
     min-width: 36px;
   }
   .burger {
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
     font-size: 32px;
   }
   #themeBtn {
