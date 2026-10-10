@@ -680,7 +680,7 @@
     ".proj:nth-child(3) h3": "Bolão da Resenha",
     ".proj:nth-child(3) .p-desc": "Sports platform for organizing predictions, following results and checking standings.",
     ".p-link": "View details",
-    ".proj:nth-child(4) h3": "Motorista Copiloto",
+    ".proj:nth-child(4) h3": "Driver Copilot",
     ".proj:nth-child(4) .p-stack": "Node.js · PostgreSQL · JavaScript · Android",
     ".proj:nth-child(4) .p-desc": "Financial copilot for drivers to track costs, rides, goals and real profit, with intelligent offer analysis.",
     ".proj:nth-child(4) .p-link": "View details",
@@ -762,6 +762,22 @@
     const langButton = document.querySelector("#langBtn");
     langButton.textContent = language === "en" ? "PT" : "EN";
     langButton.setAttribute("aria-label", language === "en" ? "Mudar idioma para português" : "Mudar idioma para inglês");
+    const projectAriaLabels = language === "en"
+      ? [
+          "View Medical system project details",
+          "View Connecting the Community project details",
+          "View Bolão da Resenha project details",
+          "View Driver Copilot project details",
+        ]
+      : [
+          "Ver detalhes do projeto Sistema médico",
+          "Ver detalhes do projeto Conectando a Comunidade",
+          "Ver detalhes do projeto Bolão da Resenha",
+          "Ver detalhes do projeto Motorista Copiloto",
+        ];
+    projects.forEach((project, index) => {
+      project.setAttribute("aria-label", projectAriaLabels[index]);
+    });
     const commandButton = document.querySelector("#cmdkTrigger");
     const commandDialog = document.querySelector(".cmdk-box");
     const commandCloseButton = document.querySelector("#cmdkClose");
