@@ -586,7 +586,7 @@
     ".nav-links li:nth-child(4) a": "Stack",
     ".nav-links li:nth-child(5) a": "Journey",
     ".nav-links li:nth-child(6) a": "Contact",
-    ".hero-sub": "I build multi-tenant back ends with Node.js and TypeScript — domain separated from infrastructure, versioned migrations and reliable deployments.",
+    ".hero-sub": "Interfaces, APIs and Libraries.<br><br>Designed through internships, college, courses and curiosity about the cyber world.",
     ".btn-solid": "View projects",
     ".btn-ghost": "&gt;_ OPEN RÉSUMÉ",
     ".stat:nth-child(1) .k": "isolated_tenants",

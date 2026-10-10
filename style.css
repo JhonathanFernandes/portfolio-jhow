@@ -359,6 +359,7 @@ a {
   transform: translateY(-1px);
 }
 #themeBtn {
+  position: relative;
   font-size: 22px;
   line-height: 1;
   display: inline-grid;
@@ -1030,10 +1031,10 @@ footer {
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    width: 42px;
-    height: 42px;
-    min-width: 42px;
-    font-size: 38px;
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    font-size: 44px;
     font-weight: 500;
     line-height: 1;
   }
@@ -1862,10 +1863,14 @@ html {
 }
 #themeBtn::before {
   content: "☀";
-  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
   font-size: 24px;
   line-height: 1;
-  transform: translateY(-1px);
+  transform: translate(-50%, -50%);
 }
 [data-theme="light"] #themeBtn {
   padding: 0;
@@ -1874,8 +1879,14 @@ html {
   text-shadow: 0 0 12px rgba(82, 151, 201, 0.28);
 }
 [data-theme="light"] #themeBtn::before {
-  content: "☾";
-  transform: translate(1px, -1px);
+  content: "";
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: currentColor;
+  -webkit-mask: radial-gradient(circle at 68% 34%, transparent 0 43%, #000 46%);
+  mask: radial-gradient(circle at 68% 34%, transparent 0 43%, #000 46%);
+  transform: translate(-50%, -50%);
 }
 .language-toggle {
   font-size: 13px;
@@ -1908,6 +1919,18 @@ html {
   .nav-tools {
     gap: 8px;
   }
+  #themeBtn,
+  .language-toggle {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+  }
+  .burger {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    font-size: 42px;
+  }
   .nav-links {
     gap: 24px;
   }
@@ -1931,10 +1954,10 @@ html {
   }
   .burger {
     left: -4px;
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    font-size: 36px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    font-size: 40px;
   }
   #themeBtn {
     font-size: 0;
