@@ -466,12 +466,12 @@
   updateCinematicReveal();
 
   const skills = [
-    ["TypeScript", 88],
-    ["Node.js / Express", 85],
-    ["Prisma / SQL", 82],
-    ["Clean Architecture", 80],
-    ["React", 74],
-    ["Docker / Deploy", 70],
+    ["TypeScript", 45],
+    ["Node.js / Express", 50],
+    ["Prisma / SQL", 50],
+    ["Clean Architecture", 40],
+    ["React", 55],
+    ["Docker / Deploy", 55],
   ];
   document.querySelector(".skills").innerHTML =
     '<p class="lead" style="margin:0 0 26px">Nível de domínio autoavaliado.</p>' +
@@ -718,7 +718,7 @@
     "label[for='f-mail']": "email",
     "label[for='f-msg']": "message",
     ".send": "Send message",
-    "footer": "JHOW.DEV — back end, architecture and systems that go live."
+    "footer": "JHOW.DEV — Front end. Every day brings something new to learn."
   };
   const portugueseContent = new Map();
   Object.keys(englishContent).forEach((selector) => {

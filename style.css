@@ -811,7 +811,10 @@ em {
 }
 .ico {
   text-align: center;
-  font-size: 10px;
+  color: var(--bandink);
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 1;
 }
 .ico .ico-mark {
   width: 52px;
@@ -828,6 +831,12 @@ em {
   width: 32px;
   height: 32px;
   object-fit: contain;
+}
+.ico .ico-mark img[src*="wordmark"] {
+  width: 46px;
+}
+[data-theme="dark"] .ico .ico-mark img[src*="nextjs"] {
+  filter: brightness(0) invert(1);
 }
 .ico:hover .ico-mark {
   transform: translateY(-4px);
