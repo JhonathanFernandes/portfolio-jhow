@@ -675,6 +675,8 @@
     ".fchip[data-f='todos']": "All",
     ".proj:nth-child(1) h3": "Medical system",
     ".proj:nth-child(5) h3": "Accounting Website",
+    ".proj:nth-child(6) h3": "Fitness App",
+    ".proj:nth-child(6) .p-desc": "Flutter fitness app for workouts, nutrition, weight and body measurements, with a customized interface.",
     ".proj:nth-child(5) .p-desc": "Responsive accounting website with custom design, service pages, animations and scroll transitions.",
     ".proj:nth-child(1) .p-desc": "Clinic management platform focused on organizing appointments, patients and access control.",
     ".proj:nth-child(2) h3": "Connecting the Community",
@@ -770,12 +772,16 @@
           "View Connecting the Community project details",
           "View Bolão da Resenha project details",
           "View Driver Copilot project details",
+          "View Accounting Website project details",
+          "View Fitness App project details",
         ]
       : [
           "Ver detalhes do projeto Sistema médico",
           "Ver detalhes do projeto Conectando a Comunidade",
           "Ver detalhes do projeto Bolão da Resenha",
           "Ver detalhes do projeto Motorista Copiloto",
+          "Ver detalhes do projeto Website de Contabilidade",
+          "Ver detalhes do projeto App Fitness",
         ];
     projects.forEach((project, index) => {
       project.setAttribute("aria-label", projectAriaLabels[index]);
