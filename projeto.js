@@ -6,6 +6,32 @@
    * As duas imagens de cada projeto ficam nos caminhos informados em `images`.
    */
   const projectsPt = {
+    "website-contabilidade": {
+      name: "Website de Contabilidade",
+      category: "Web",
+      status: "Publicado",
+      summary: "Website responsivo para o setor contábil, com identidade visual personalizada, páginas de serviços e animações interativas.",
+      about: [
+        "Projeto de front-end desenvolvido por Jhonathan Fernandes (JHOW.DEV), com foco em apresentação profissional, experiência visual e navegação responsiva.",
+        "A interface reúne seções de apresentação, trajetória, áreas de atuação, conteúdo informativo sobre reforma tributária e contato. O destaque técnico está nas transições visuais, nos cards interativos e na organização da aplicação com Next.js.",
+        "O formulário visual de e-mail ainda não realiza envio. Marcas demonstrativas e informações profissionais devem ser validadas antes de divulgação como fatos confirmados."
+      ],
+      features: [
+        "Layout adaptado a computadores e celulares.",
+        "Páginas de detalhamento de serviços.",
+        "Animações de entrada e efeitos durante a rolagem.",
+        "Seções informativas e links para canais de contato."
+      ],
+      technologies: {
+        "Front-end": ["Next.js 15", "React 19", "TypeScript", "CSS"],
+        "Animações e interface": ["GSAP", "Framer Motion", "Lucide React"],
+        "Publicação": ["GitHub Pages"]
+      },
+      featuredTechnologies: ["Next.js", "React", "TypeScript", "GSAP", "Framer Motion", "CSS"],
+      liveUrl: "https://jhonathanfernandes.github.io/projeto-contabilidade/",
+      githubUrl: "https://github.com/JhonathanFernandes/projeto-contabilidade",
+      images: []
+    },
     "bolao-da-resenha": {
       name: "Bolão da Resenha",
       category: "SaaS",
@@ -145,6 +171,28 @@
   };
 
   const projectsEn = {
+    "website-contabilidade": {
+      ...projectsPt["website-contabilidade"],
+      name: "Accounting Website",
+      status: "Published",
+      summary: "Responsive accounting website with custom visual identity, service pages and interactive animations.",
+      about: [
+        "Front-end project developed by Jhonathan Fernandes (JHOW.DEV), focusing on professional presentation, visual experience and responsive navigation.",
+        "The interface includes introduction, professional background, service areas, tax reform information and contact sections. Its technical highlights are visual transitions, interactive cards and the Next.js application structure.",
+        "The visual email form does not submit messages yet. Demonstrative brands and professional information require verification before being presented as confirmed facts."
+      ],
+      features: [
+        "Responsive desktop and mobile layout.",
+        "Dedicated service detail pages.",
+        "Entrance animations and scroll effects.",
+        "Informational sections and contact links."
+      ],
+      technologies: {
+        "Front end": ["Next.js 15", "React 19", "TypeScript", "CSS"],
+        "Animations and interface": ["GSAP", "Framer Motion", "Lucide React"],
+        "Deployment": ["GitHub Pages"]
+      }
+    },
     "bolao-da-resenha": {
       ...projectsPt["bolao-da-resenha"],
       status: "Evolving",
