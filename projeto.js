@@ -31,7 +31,7 @@
         "Plataformas": ["Android", "iOS"]
       },
       featuredTechnologies: ["Flutter", "Dart", "Riverpod", "Drift", "API REST", "SQLite"],
-      liveUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness/actions",
+      liveUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness/actions/runs/40094581116#artifacts",
       githubUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness",
       images: []
     },
