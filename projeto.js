@@ -588,6 +588,7 @@
 
   const gallery = document.querySelector("#projectGallery");
   if (slug === "app-fitness") gallery.classList.add("fitness-gallery");
+  if (slug === "bolao-da-resenha") gallery.classList.add("bolao-gallery");
   const lightbox = document.querySelector("#imageLightbox");
   const lightboxImage = document.querySelector("#lightboxImage");
   const lightboxCaption = document.querySelector("#lightboxCaption");
