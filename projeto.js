@@ -140,7 +140,7 @@
         "Arquitetura SaaS": ["Multi-tenant", "Monorepo", "Pacote compartilhado", "Isolamento por organização", "Gestão de assinaturas"],
       },
       featuredTechnologies: ["React", "TypeScript", "Vite", "Node.js", "Express", "Prisma ORM", "MySQL", "Mercado Pago", "PWA"],
-      liveUrl: "https://www.bolaodaresenha.site/jhowtestenovo-9fc76d",
+      liveUrl: "https://bolaodaresenha.site",
       githubUrl: "",
       images: [
         {
