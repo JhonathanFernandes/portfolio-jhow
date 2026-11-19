@@ -31,7 +31,7 @@
         "Plataformas": ["Android", "iOS"]
       },
       featuredTechnologies: ["Flutter", "Dart", "Riverpod", "Drift", "API REST", "SQLite"],
-      liveUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness/releases/download/v1.0.0/app-debug.apk",
+      liveUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness/releases/download/V1.0.0/app-debug.apk",
       githubUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness",
       images: []
     },
