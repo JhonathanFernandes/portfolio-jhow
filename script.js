@@ -674,6 +674,8 @@
     "#projetos > .sec-in > .lead": "Projects that moved from an idea into real applications. Each one has its own purpose, technical decisions and challenges.",
     ".fchip[data-f='todos']": "All",
     ".proj:nth-child(1) h3": "Medical system",
+    ".proj:nth-child(5) h3": "Accounting Website",
+    ".proj:nth-child(5) .p-desc": "Responsive accounting website with custom design, service pages, animations and scroll transitions.",
     ".proj:nth-child(1) .p-desc": "Clinic management platform focused on organizing appointments, patients and access control.",
     ".proj:nth-child(2) h3": "Connecting the Community",
     ".proj:nth-child(2) .p-desc": "Published web project developed to connect the community.",
