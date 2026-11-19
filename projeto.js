@@ -6,6 +6,35 @@
    * As duas imagens de cada projeto ficam nos caminhos informados em `images`.
    */
   const projectsPt = {
+    "app-fitness": {
+      name: "App Fitness",
+      category: "Mobile",
+      status: "Em desenvolvimento",
+      summary: "Aplicativo Flutter para acompanhar treinos, alimentação, peso e medidas corporais, com personalização visual e idioma português brasileiro.",
+      about: [
+        "Projeto de personalização e evolução de um aplicativo de academia baseado no software livre wger Workout Manager, com código original desenvolvido pela comunidade wger.",
+        "O trabalho inclui adaptação da interface para português brasileiro, identidade visual escura com destaques em verde-limão e melhorias nas telas de treinos, nutrição, peso e galeria.",
+        "A integração de dados depende de um servidor wger compatível. A personalização ainda precisa de compilação, auditoria visual e testes em dispositivos Android. O código derivado mantém os créditos e a licença AGPL do projeto original."
+      ],
+      features: [
+        "Acompanhamento de rotinas de treino e exercícios.",
+        "Planejamento e registro de alimentação.",
+        "Histórico de peso e medidas corporais.",
+        "Galeria e reprodução de conteúdos multimídia compatíveis.",
+        "Interface em português brasileiro e opção de inglês.",
+        "Integração com servidor wger por API REST."
+      ],
+      technologies: {
+        "Aplicativo": ["Flutter", "Dart", "Material UI"],
+        "Estado e dados": ["Riverpod", "Drift", "SQLite", "PowerSync"],
+        "Integração": ["API REST", "HTTP", "Servidor wger"],
+        "Plataformas": ["Android", "iOS"]
+      },
+      featuredTechnologies: ["Flutter", "Dart", "Riverpod", "Drift", "API REST", "SQLite"],
+      liveUrl: "",
+      githubUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness",
+      images: []
+    },
     "website-contabilidade": {
       name: "Website de Contabilidade",
       category: "Web",
@@ -171,6 +200,31 @@
   };
 
   const projectsEn = {
+    "app-fitness": {
+      ...projectsPt["app-fitness"],
+      name: "Fitness App",
+      status: "In development",
+      summary: "Flutter app for tracking workouts, nutrition, weight and body measurements, with a customized interface and Brazilian Portuguese support.",
+      about: [
+        "Customization and development project based on the open-source wger Workout Manager, originally created by the wger community.",
+        "Work includes Brazilian Portuguese localization, a dark theme with lime-green accents and improvements to workout, nutrition, weight and gallery screens.",
+        "Connected features require a compatible wger server. Android builds, visual review and device testing are still pending. Original attribution and AGPL licensing are preserved."
+      ],
+      features: [
+        "Workout routines and exercise tracking.",
+        "Nutrition planning and logging.",
+        "Weight and body measurement history.",
+        "Compatible multimedia gallery and playback.",
+        "Brazilian Portuguese interface with English option.",
+        "REST API integration with a wger server."
+      ],
+      technologies: {
+        "App": ["Flutter", "Dart", "Material UI"],
+        "State and data": ["Riverpod", "Drift", "SQLite", "PowerSync"],
+        "Integration": ["REST API", "HTTP", "wger server"],
+        "Platforms": ["Android", "iOS"]
+      }
+    },
     "website-contabilidade": {
       ...projectsPt["website-contabilidade"],
       name: "Accounting Website",
