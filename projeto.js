@@ -62,7 +62,6 @@
       status: "Publicado",
       summary: "Website responsivo para o setor contábil, com identidade visual personalizada, páginas de serviços e animações interativas.",
       about: [
-        "Projeto de front-end desenvolvido por Jhonathan Fernandes (JHOW.DEV), com foco em apresentação profissional, experiência visual e navegação responsiva.",
         "A interface reúne seções de apresentação, trajetória, áreas de atuação, conteúdo informativo sobre reforma tributária e contato. O destaque técnico está nas transições visuais, nos cards interativos e na organização da aplicação com Next.js.",
         "O formulário visual de e-mail ainda não realiza envio. Marcas demonstrativas e informações profissionais devem ser validadas antes de divulgação como fatos confirmados."
       ],
@@ -283,7 +282,6 @@
       status: "Published",
       summary: "Responsive accounting website with custom visual identity, service pages and interactive animations.",
       about: [
-        "Front-end project developed by Jhonathan Fernandes (JHOW.DEV), focusing on professional presentation, visual experience and responsive navigation.",
         "The interface includes introduction, professional background, service areas, tax reform information and contact sections. Its technical highlights are visual transitions, interactive cards and the Next.js application structure.",
         "The visual email form does not submit messages yet. Demonstrative brands and professional information require verification before being presented as confirmed facts."
       ],
