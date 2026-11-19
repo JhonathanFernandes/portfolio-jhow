@@ -558,6 +558,7 @@
   else githubLink.hidden = true;
 
   const gallery = document.querySelector("#projectGallery");
+  if (slug === "app-fitness") gallery.classList.add("fitness-gallery");
   const lightbox = document.querySelector("#imageLightbox");
   const lightboxImage = document.querySelector("#lightboxImage");
   const lightboxCaption = document.querySelector("#lightboxCaption");
