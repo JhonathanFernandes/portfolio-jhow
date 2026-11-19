@@ -80,7 +80,38 @@
       featuredTechnologies: ["Next.js", "React", "TypeScript", "GSAP", "Framer Motion", "CSS"],
       liveUrl: "https://jhonathanfernandes.github.io/projeto-contabilidade/",
       githubUrl: "https://github.com/JhonathanFernandes/projeto-contabilidade",
-      images: []
+      images: [
+        {
+                "src": "https://raw.githubusercontent.com/JhonathanFernandes/projeto-contabilidade/main/Captura%20de%20tela%20de%202026-11-19%2020%3A31%3A26.png",
+                "alt": "Website de Contabilidade — captura 1",
+                "caption": "Tela 1"
+        },
+        {
+                "src": "https://raw.githubusercontent.com/JhonathanFernandes/projeto-contabilidade/main/Captura%20de%20tela%20de%202026-11-19%2020%3A31%3A45.png",
+                "alt": "Website de Contabilidade — captura 2",
+                "caption": "Tela 2"
+        },
+        {
+                "src": "https://raw.githubusercontent.com/JhonathanFernandes/projeto-contabilidade/main/Captura%20de%20tela%20de%202026-11-19%2020%3A32%3A17.png",
+                "alt": "Website de Contabilidade — captura 3",
+                "caption": "Tela 3"
+        },
+        {
+                "src": "https://raw.githubusercontent.com/JhonathanFernandes/projeto-contabilidade/main/Captura%20de%20tela%20de%202026-11-19%2020%3A33%3A19.png",
+                "alt": "Website de Contabilidade — captura 4",
+                "caption": "Tela 4"
+        },
+        {
+                "src": "https://raw.githubusercontent.com/JhonathanFernandes/projeto-contabilidade/main/Captura%20de%20tela%20de%202026-11-19%2020%3A33%3A39.png",
+                "alt": "Website de Contabilidade — captura 5",
+                "caption": "Tela 5"
+        },
+        {
+                "src": "https://raw.githubusercontent.com/JhonathanFernandes/projeto-contabilidade/main/Captura%20de%20tela%20de%202026-11-19%2020%3A34%3A11.png",
+                "alt": "Website de Contabilidade — captura 6",
+                "caption": "Tela 6"
+        }
+]
     },
     "bolao-da-resenha": {
       name: "Bolão da Resenha",
