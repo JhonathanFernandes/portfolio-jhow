@@ -33,7 +33,28 @@
       featuredTechnologies: ["Flutter", "Dart", "Riverpod", "Drift", "API REST", "SQLite"],
       liveUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness/releases/download/V1.0.0/app-debug.apk",
       githubUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness",
-      images: []
+      images: [
+              {
+                      "src": "Screenshot_20261119_202638_Meu%20Fit%20-%20teste.jpg",
+                      "alt": "App Fitness — tela de Início",
+                      "caption": "Início"
+              },
+              {
+                      "src": "Screenshot_20261119_202701_Meu%20Fit%20-%20teste.jpg",
+                      "alt": "App Fitness — tela de Treinos",
+                      "caption": "Treinos"
+              },
+              {
+                      "src": "Screenshot_20261119_202652_Meu%20Fit%20-%20teste.jpg",
+                      "alt": "App Fitness — tela de Dieta",
+                      "caption": "Dieta"
+              },
+              {
+                      "src": "Screenshot_20261119_202710_Meu%20Fit%20-%20teste.jpg",
+                      "alt": "App Fitness — tela de Evolução",
+                      "caption": "Evolução"
+              }
+      ]
     },
     "website-contabilidade": {
       name: "Website de Contabilidade",
