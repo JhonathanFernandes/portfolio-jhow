@@ -31,7 +31,7 @@
         "Plataformas": ["Android", "iOS"]
       },
       featuredTechnologies: ["Flutter", "Dart", "Riverpod", "Drift", "API REST", "SQLite"],
-      liveUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness/actions/runs/40094581116#artifacts",
+      liveUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness/releases/download/v1.0.0/app-debug.apk",
       githubUrl: "https://github.com/JhonathanFernandes/Meuapp-fitness",
       images: []
     },
@@ -527,7 +527,7 @@
   const pendingLink = document.querySelector("#projectLinkPending");
   if (project.liveUrl) {
     liveLink.href = project.liveUrl;
-    if (projectId === "app-fitness") liveLink.textContent = language === "en" ? "Get Android APK (GitHub Actions) ↗" : "Obter APK Android (GitHub Actions) ↗";
+    if (slug === "app-fitness") liveLink.textContent = currentLanguage === "en" ? "Download Android APK ↓" : "Baixar APK Android ↓";
     pendingLink.hidden = true;
   } else {
     liveLink.hidden = true;
