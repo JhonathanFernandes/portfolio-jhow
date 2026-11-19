@@ -540,5 +540,12 @@ body:has(.image-lightbox[open]) {
   justify-self: center;
 }
 .project-gallery.fitness-gallery .project-shot-media {
-  aspect-ratio: 9 / 20;
+  aspect-ratio: auto;
+  height: auto;
+  overflow: visible;
+}
+.project-gallery.fitness-gallery .project-shot img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
