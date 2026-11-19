@@ -549,3 +549,16 @@ body:has(.image-lightbox[open]) {
   height: auto;
   object-fit: contain;
 }
+
+/* Preserve full Bolão da Resenha screenshots without cropping. */
+.project-gallery.bolao-gallery .project-shot-media {
+  aspect-ratio: auto;
+  height: auto;
+  overflow: visible;
+}
+.project-gallery.bolao-gallery .project-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
